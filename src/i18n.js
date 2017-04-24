@@ -1,6 +1,5 @@
 import { install, Vue } from './install';
 
-
 export default class VueI18n {
   constructor(options = {}) {
     this._vm = null;
@@ -36,7 +35,7 @@ export default class VueI18n {
 }
 
 VueI18n.install = install;
-VueI18n.version = '__VERSION__';
+VueI18n.version = __VERSION__;
 
 if (typeof window && window.Vue) {
   window.Vue.use(VueI18n);

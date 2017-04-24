@@ -10,7 +10,8 @@
   },
    "globals": {
     "document": true,
-    "window": true
+    "window": true,
+    "__VERSION__": true
   },
   "plugins": [],
   "extends": [
