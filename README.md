@@ -2,8 +2,88 @@
 
 > Internationalization for vue using the i18next i18n ecosystem. http://i18next.com/
 
+#Installation
+
+Source can be loaded via
+
+```
+# npm package
+$ npm install @panter/vue-i18next
+```
+
+- If you don't use a module loader it will be added to `window.VueI18next.default`
+
+### Requirements
+
+- vue >= __2.0.0__
+- i18next >= __6.0.1__
+
 ## Usage
 
+### Init
+
+``` javascript
+
+import Vue from 'vue';
+import i18next from 'i18next';
+import VueI18Next from '@panter/vue-i18next';
+
+Vue.use(VueI18Next);
+
+i18next.init({
+  lng: 'de',
+  resources: {
+    ...
+  }
+});
+
+const i18n = new VueI18Next({ i18next });
+new Vue({
+  ...
+  i18n: i18n,
+});
+```
+
+### Init direct in Browser
+
+
+``` html
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/i18next@8.0.0/i18next.js"></script>
+<script src="vue-i18next.js"></script>
+
+```
+``` javascript
+
+i18next.init({
+  lng: 'en',
+  resources: {
+    en: { translation: locales.en },
+    de: { translation: locales.de },
+  },
+});
+
+const i18n = new VueI18next.default({
+  i18next,
+});
+
+new Vue({
+  i18n,
+}).$mount('#app');
+
+```
+
+
+### Change Language
+``` javascript
+import i18next from 'i18next';
+
+...
+
+i18next.changeLanguage('it');
+
+```
 
 
 ## Build Setup

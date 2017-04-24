@@ -25,11 +25,9 @@ const i18n = new VueI18next.default({
   i18next,
 });
 
-const vm = new Vue({
+new Vue({
   i18n,
 }).$mount('#app');
-
-window.vm = vm;
 
 setTimeout(() => {
   i18next.changeLanguage('de');
