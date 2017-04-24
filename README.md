@@ -1,6 +1,6 @@
-# vue-i18next
+# vue-i18next [![Build Status](https://travis-ci.org/panter/vue-i18next.svg?branch=master)](https://travis-ci.org/panter/vue-i18next)
 
-> Internationalization plugin that wraps [i18next](http://i18next.com/) for Vue.js
+> Internationalization for vue using the i18next i18n ecosystem. http://i18next.com/
 
 ## Usage
 
