@@ -1,13 +1,18 @@
 import { install, Vue } from './install';
 
 export default class VueI18n {
-  constructor(options = {}) {
-    this._vm = null;
-    this.i18next = options.i18next;
+  constructor(i18next, options = { }) {
+    const { bindI18n = 'languageChanged loaded', bindStore = 'added removed' } = options;
 
-    this.i18next.on('languageChanged loaded', () => {
-      this.i18nLoadedAt = new Date();
-    });
+    this._vm = null;
+    this.i18next = i18next;
+    this.onI18nChanged = this.onI18nChanged.bind(this);
+
+    if (bindI18n) { this.i18next.on(bindI18n, this.onI18nChanged); }
+    if (bindStore && this.i18next.store) {
+      this.i18next.store.on(bindStore, this.onI18nChanged);
+    }
+
     this.resetVM({ i18nLoadedAt: new Date() });
   }
 
@@ -31,6 +36,10 @@ export default class VueI18n {
 
   t(key, options) {
     return this.i18next.t(key, options);
+  }
+
+  onI18nChanged() {
+    this.i18nLoadedAt = new Date();
   }
 }
 

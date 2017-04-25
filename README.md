@@ -54,6 +54,7 @@ new Vue({
 <script src="vue-i18next.js"></script>
 
 ```
+
 ``` javascript
 
 i18next.init({
@@ -64,13 +65,25 @@ i18next.init({
   },
 });
 
-const i18n = new VueI18next({
-  i18next,
-});
+const i18n = new VueI18next(i18n);
 
 new Vue({
   i18n,
 }).$mount('#app');
+
+```
+
+### find i18n in the context
+``` javascript
+
+Vue.component('language-changer', {
+  template: '<div><a v-on:click="changeLanguage(\'de\')">DE</a></div>',
+  methods: {
+    changeLanguage(lang) {
+      this.$i18n.i18next.changeLanguage(lang);
+    },
+  },
+});
 
 ```
 
@@ -84,7 +97,6 @@ import i18next from 'i18next';
 i18next.changeLanguage('it');
 
 ```
-
 
 ## Build Setup
 
