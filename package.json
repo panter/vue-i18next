@@ -1,7 +1,7 @@
 {
   "name": "@panter/vue-i18next",
   "description": "i18next wrapper for vue",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Claudio Romano <cro@panter.ch>",
   "license": "MIT",
   "repository": {
@@ -34,6 +34,7 @@
     "babel-core": "^6.0.0",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "6.x.x",
     "babel-preset-stage-2": "6.x.x",
     "cross-env": "^3.0.0",
@@ -50,6 +51,6 @@
     "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
-    "babel-plugin-add-module-exports": "^0.2.1"
+
   }
 }
