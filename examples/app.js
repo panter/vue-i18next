@@ -21,7 +21,7 @@ i18next.init({
   },
 });
 
-const i18n = new VueI18next.default({
+const i18n = new VueI18next({
   i18next,
 });
 

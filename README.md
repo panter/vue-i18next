@@ -11,7 +11,7 @@ Source can be loaded via
 $ npm install @panter/vue-i18next
 ```
 
-- If you don't use a module loader it will be added to `window.VueI18next.default`
+- If you don't use a module loader it will be added to `window.VueI18next`
 
 ### Requirements
 
@@ -64,7 +64,7 @@ i18next.init({
   },
 });
 
-const i18n = new VueI18next.default({
+const i18n = new VueI18next({
   i18next,
 });
 

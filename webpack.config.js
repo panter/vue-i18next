@@ -10,6 +10,7 @@ module.exports = {
     filename: 'vue-i18next.js',
     library: ['VueI18next'],
     libraryTarget: 'umd',
+    umdNamedDefine: true,
   },
   module: {
     rules: [
