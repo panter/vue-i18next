@@ -3,3 +3,4 @@ node_modules/
 dist/
 lib/
 npm-debug.log
+test/coverage
