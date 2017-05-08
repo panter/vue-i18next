@@ -17,7 +17,7 @@ describe('$t', () => {
 
   describe('$t computed', () => {
     describe('should translate', () => {
-      it('should translate an english', (done) => {
+      it('should translate an english', async () => {
         const el = document.createElement('div');
         const vm = new Vue({
           i18n: vueI18Next,
@@ -26,11 +26,9 @@ describe('$t', () => {
           },
         }).$mount(el);
 
+        await nextTick();
         const { text } = vm.$refs;
-        nextTick().then(() => {
-          expect(text.textContent).to.equal('Hello');
-          done();
-        });
+        expect(text.textContent).to.equal('Hello');
       });
     });
   });

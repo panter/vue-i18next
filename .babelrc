@@ -5,7 +5,7 @@
   "plugins": ["babel-plugin-add-module-exports"],
   "env": {
     "test": {
-      "presets": ["es2015"],
+      "presets": ["es2015", "es2017"],
       "plugins": ["istanbul"]
     }
   }
