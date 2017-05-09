@@ -1,7 +1,7 @@
 {
   "name": "@panter/vue-i18next",
   "description": "i18next wrapper for vue",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Claudio Romano <cro@panter.ch>",
   "license": "MIT",
   "repository": {
