@@ -25,7 +25,9 @@
     "build:lib": "rimraf ./lib && babel src --out-dir lib",
     "lint": "eslint src/**.js",
     "test": "npm run lint && npm run test:unit",
-    "test:unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js"
+    "test:unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js",
+    "gh-pages": "npm run build && rimraf ./gh-pages && mkdirp ./gh-pages/examples mkdirp ./gh-pages/dist && ncp ./examples ./gh-pages/examples && ncp ./dist ./gh-pages/dist",
+    "gh-pages-publish": "gh-pages -d gh-pages"
   },
   "main": "./dist/vue-i18next.js",
   "peerDependencies": {
@@ -51,6 +53,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "file-loader": "^0.9.0",
+    "gh-pages": "^1.0.0",
     "i18next": "^6.0.1",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
@@ -68,8 +71,10 @@
     "karma-sinon-chai": "^1.2.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.2",
+    "mkdirp": "^0.5.1",
     "mocha": "^3.2.0",
     "mocha-loader": "^1.1.1",
+    "ncp": "^2.0.0",
     "phantomjs-prebuilt": "^2.1.14",
     "rimraf": "^2.6.1",
     "sinon": "^2.1.0",

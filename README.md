@@ -20,6 +20,8 @@ $ npm install @panter/vue-i18next
 
 ## Usage
 
+[DEMO](https://panter.github.io/vue-i18next/examples/)
+
 ### Init
 
 ``` javascript

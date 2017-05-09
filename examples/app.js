@@ -6,19 +6,22 @@ const locales = {
     },
     tos: 'Term of Service',
     term: 'I accept {{1}} {{0}}.',
+    loadbundle: 'Load Bundle {{lang}}',
   },
 
   de: {
     message: {
       hello: 'Hallo!! - DE',
     },
-    tos: 'Geschäft',
+    tos: 'Nutzungsbedingungen',
     term: 'Ich akzeptiere {{0}}. {{1}}',
+    loadbundle: 'Bundle Laden {{lang}}',
   },
 };
 
 i18next.init({
   lng: 'en',
+  fallbackLng: 'en',
   resources: {
     en: { translation: locales.en },
   },
@@ -29,9 +32,13 @@ const i18n = new VueI18next(i18next);
 Vue.component('app', {
   template: `
     <div>
-      <language-changer /><load-bundle />
-      <p>$t: {{ $t("message.hello") }}</p>
       <div>
+        <h3>Translation</h3>
+        <language-changer></language-changer><load-bundle></load-bundle>
+        <p>$t: {{ $t("message.hello") }}</p>
+      </div>
+      <div>
+        <h3>Interpolation</h3>
         <i18next path="term" tag="label" for="tos">
           <a href="#" target="_blank">{{ $t("tos") }}</a>
           <strong>a</strong>
@@ -41,7 +48,12 @@ Vue.component('app', {
 });
 
 Vue.component('language-changer', {
-  template: '<div><a v-on:click="changeLanguage(\'de\')">DE</a>&nbsp;&nbsp;&nbsp;<a v-on:click="changeLanguage(\'en\')">EN</a></div>',
+  template: `
+    <div>
+      <a v-on:click="changeLanguage('de')">DE</a>
+      &nbsp;|&nbsp;
+      <a v-on:click="changeLanguage('en')">EN</a>
+    </div>`,
   methods: {
     changeLanguage(lang) {
       this.$i18n.i18next.changeLanguage(lang);
@@ -50,7 +62,15 @@ Vue.component('language-changer', {
 });
 
 Vue.component('load-bundle', {
-  template: '<div><a v-on:click="loadBundle">load de bundle</a></div>',
+  template: `
+    <div>
+      <a v-on:click="loadBundle">{{$t("loadbundle", {lang: this.lang}) }}</a>
+    </div>`,
+  data() {
+    return {
+      lang: 'DE',
+    };
+  },
   methods: {
     loadBundle() {
       this.$i18n.i18next.addResourceBundle('de', 'translation', locales.de);

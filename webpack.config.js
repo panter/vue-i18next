@@ -35,6 +35,7 @@ module.exports = {
     historyApiFallback: {
       rewrites: [
         { from: /^\/$/, to: '/examples/index.html' },
+        { from: 'app.js', to: '/examples/app.js' },
       ],
     },
     noInfo: true,
