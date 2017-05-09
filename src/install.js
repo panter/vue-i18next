@@ -1,5 +1,6 @@
-
 /* eslint-disable import/no-mutable-exports */
+import component from './component';
+
 export let Vue;
 
 export function install(_Vue) {
@@ -24,4 +25,6 @@ export function install(_Vue) {
       }
     },
   });
+
+  Vue.component(component.name, component);
 }

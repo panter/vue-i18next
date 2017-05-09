@@ -4,12 +4,16 @@ const locales = {
     message: {
       hello: 'Hello!! - EN',
     },
+    tos: 'Term of Service',
+    term: 'I accept {{1}} {{0}}.',
   },
 
   de: {
     message: {
       hello: 'Hallo!! - DE',
     },
+    tos: 'Geschäft',
+    term: 'Ich akzeptiere {{0}}. {{1}}',
   },
 };
 
@@ -17,14 +21,23 @@ i18next.init({
   lng: 'en',
   resources: {
     en: { translation: locales.en },
-    //de: { translation: locales.de },
   },
 });
 
 const i18n = new VueI18next(i18next);
 
 Vue.component('app', {
-  template: "<div><language-changer /><load-bundle /><p>$t: {{ $t('message.hello') }}</p></div>",
+  template: `
+    <div>
+      <language-changer /><load-bundle />
+      <p>$t: {{ $t("message.hello") }}</p>
+      <div>
+        <i18next path="term" tag="label" for="tos">
+          <a href="#" target="_blank">{{ $t("tos") }}</a>
+          <strong>a</strong>
+        </i18next>
+      </div>
+    </div>`,
 });
 
 Vue.component('language-changer', {

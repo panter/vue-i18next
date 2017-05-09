@@ -2,7 +2,7 @@
 
 > Internationalization for vue using the i18next i18n ecosystem. http://i18next.com/
 
-#Installation
+# Installation
 
 Source can be loaded via
 
@@ -95,6 +95,40 @@ import i18next from 'i18next';
 ...
 
 i18next.changeLanguage('it');
+
+```
+
+
+### Interpolation
+
+``` javascript
+
+const locales = {
+  en: {
+    tos: 'Term of Service',
+    term: 'I accept {{0}}. {{1}}.',
+    promise: 'I promise',
+  }
+};
+
+i18next.init({
+  lng: 'en',
+  resources: {
+    en: { translation: locales.en },
+  },
+});
+
+const i18n = new VueI18next(i18next);
+
+Vue.component('app', {
+  template: `
+    <div>
+      <i18next path="term" tag="label">
+        <a href="#" target="_blank">{{ $t("tos") }}</a>
+        <strong>{{ $t("promise") }}</strong>
+      </i18next>
+    </div>`,
+});
 
 ```
 
