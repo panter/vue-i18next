@@ -10,9 +10,6 @@ export default {
       type: String,
       required: true,
     },
-    locale: {
-      type: String,
-    },
   },
   render(h, { props, data, children, parent }) {
     const i18next = parent.$i18n;

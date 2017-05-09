@@ -21,21 +21,23 @@ i18next.init({
   lng: 'en',
   resources: {
     en: { translation: locales.en },
-    //de: { translation: locales.de },
-  },
-  interpolation: {
-    formatSeparator: ',',
-    format(value, formatting, lng) {
-      if (value instanceof Date) return 'huhu';
-      return value.toString();
-    },
   },
 });
 
 const i18n = new VueI18next(i18next);
 
 Vue.component('app', {
-  template: '<div><language-changer /><load-bundle /><p>$t: {{ $t("message.hello") }}</p><div><i18next path="term" tag="label" for="tos"><a href="#" target="_blank">{{ $t("tos") }}</a><strong>a</strong></i18n></i18next></div></div>',
+  template: `
+    <div>
+      <language-changer /><load-bundle />
+      <p>$t: {{ $t("message.hello") }}</p>
+      <div>
+        <i18next path="term" tag="label" for="tos">
+          <a href="#" target="_blank">{{ $t("tos") }}</a>
+          <strong>a</strong>
+        </i18next>
+      </div>
+    </div>`,
 });
 
 Vue.component('language-changer', {
