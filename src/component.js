@@ -22,14 +22,6 @@ export default {
     const REGEXP = i18next.i18next.services.interpolator.regexp;
     const format = i18next.t(path, { interpolation: { prefix: '#$?', suffix: '?$#' } });
     const tchildren = [];
-    const childsTKeys = {};
-    children.forEach((c) => {
-      if (c.data && c.data.attrs && c.data.attrs.tkey) {
-        childsTKeys[c.data.attrs.tkey] = c;
-      } else {
-        // TODO: warn
-      }
-    });
 
     format.split(REGEXP).reduce((memo, match, index) => {
       let child;
