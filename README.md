@@ -1,6 +1,7 @@
 # vue-i18next
 
-[![Build Status](https://travis-ci.org/panter/vue-i18next.svg?branch=master)](https://travis-ci.org/panter/vue-i18next) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Build Status](https://travis-ci.org/panter/vue-i18next.svg?branch=master)](https://travis-ci.org/panter/vue-i18next)
+[![Coverage Status](https://coveralls.io/repos/github/panter/vue-i18next/badge.svg?branch=master)](https://coveralls.io/github/panter/vue-i18next?branch=master) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 > Internationalization for vue using the i18next i18n ecosystem. http://i18next.com/
 

@@ -4,3 +4,4 @@ node_js:
 cache: yarn
 after_success:
 - npm run semantic-release
+- npm run coveralls
