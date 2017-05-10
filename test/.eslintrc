@@ -14,5 +14,8 @@
     "Vue": true,
     "VueI18Next": true,
     "i18next": true
+  },
+  "rules": {
+    "no-unused-expressions": 0
   }
 }

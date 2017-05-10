@@ -65,5 +65,19 @@ describe('interpolation', () => {
       await nextTick();
       expect(vm.$el.outerHTML).to.equal('<div>Hello <span>test</span> <p>First Hello</p>.</div>');
     });
+
+    it('should just return the children if i18next is not installed', async () => {
+      const el = document.createElement('div');
+      const vm = new Vue({
+        render(h) {
+          return h('i18next', { props: { tag: 'div', path: 'hello2' } }, [
+            h('span', ['test']),
+          ]);
+        },
+      }).$mount(el);
+
+      await nextTick();
+      expect(vm.$el.outerHTML).to.equal('<div><span>test</span></div>');
+    });
   });
 });

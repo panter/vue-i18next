@@ -14,7 +14,7 @@ export default {
   render(h, { props, data, children, parent }) {
     const i18next = parent.$i18n;
     if (!i18next) {
-      return children;
+      return h(props.tag, data, children);
     }
 
     const path = props.path;

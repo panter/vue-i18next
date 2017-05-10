@@ -33,4 +33,14 @@ describe('basic', () => {
       expect(oldVm).to.not.equal(vueI18Next._vm);
     });
   });
+
+  describe('does not install itself multiple times', () => {
+    it('aborts if already intalled', () => {
+      expect(VueI18Next.install.installed).to.be.true;
+      let duckMixin = false;
+      Vue.mixin = () => { duckMixin = true; };
+      VueI18Next.install(Vue);
+      expect(duckMixin).to.be.false;
+    });
+  });
 });
