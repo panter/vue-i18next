@@ -23,7 +23,7 @@ $ npm install @panter/vue-i18next
 
 ## Usage
 
-[DEMO](https://panter.github.io/vue-i18next/examples/)
+Check the [DEMO](https://panter.github.io/vue-i18next/examples/) to see `vue-i18next` in action.
 
 ### Init
 
@@ -75,6 +75,38 @@ const i18n = new VueI18next(i18n);
 new Vue({
   i18n,
 }).$mount('#app');
+
+```
+
+### $t
+
+The `$t` function is a wrapper for `i18next.t`.
+
+Check [i18next](http://i18next.com/translate/#basictranslation) documentation for more informations.
+
+``` javascript
+
+const locales = {
+  en: {
+    loadbundle: 'Load bundle language: {{lang}}',
+  }
+};
+
+i18next.init({
+  lng: 'en',
+  resources: {
+    en: { translation: locales.en },
+  },
+});
+
+const i18n = new VueI18next(i18next);
+
+Vue.component('app', {
+  template: `
+    <div>
+      <strong>{{$t("loadbundle", {lang: this.lang}) }}</strong>
+    </div>`,
+});
 
 ```
 
