@@ -1,8 +1,7 @@
-
+import 'babel-polyfill';
 import Vue from 'vue';
 import i18next from 'i18next';
 import VueI18Next from '../../src/i18n';
-import 'babel-polyfill';
 
 Vue.config.productionTip = false;
 Vue.use(VueI18Next);
