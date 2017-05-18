@@ -106,6 +106,10 @@ Vue.component('app', {
     <div>
       <strong>{{$t("loadbundle", {lang: this.lang}) }}</strong>
     </div>`,
+  data() {
+    return {
+      lang: 'DE',
+    };
 });
 
 ```
