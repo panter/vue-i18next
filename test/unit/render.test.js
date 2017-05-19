@@ -76,4 +76,36 @@ describe('$t loaded languages', () => {
       expect(text.textContent).to.equal('Hallo');
     });
   });
+
+
+  describe('do not bind any listeners', () => {
+    let vueI18Next;
+    beforeEach(() => {
+      vueI18Next = new VueI18Next(i18next, { bindI18n: '', bindStore: '' });
+      i18next.init({
+        lng: 'en',
+        resources: {
+          en: { translation: { hello: 'Hello' } },
+        },
+      });
+    });
+
+    it('should translate to german after loaded', async () => {
+      const el = document.createElement('div');
+      const vm = new Vue({
+        i18n: vueI18Next,
+        render(h) {
+          return h('p', { ref: 'text' }, [this.$t('hello')]);
+        },
+      }).$mount(el);
+
+      const { text } = vm.$refs;
+      await nextTick();
+      expect(text.textContent).to.equal('Hello');
+      i18next.changeLanguage('de');
+      i18next.addResourceBundle('de', 'translation', { hello: 'Hallo' });
+      await nextTick();
+      expect(text.textContent).to.equal('Hello');
+    });
+  });
 });
