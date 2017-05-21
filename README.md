@@ -173,6 +173,43 @@ Vue.component('app', {
 
 ```
 
+### i18nOptions
+
+The namespace will be loaded with (loadNamespaces)[http://i18next.com/docs/api/#load-namespaces],so one can lazy load namespaces for components.
+
+``` javascript
+
+const locales = {
+  en: {
+    tos: 'Term of Service',
+    term: 'I accept {{0}}. {{1}}.',
+    promise: 'I promise',
+  }
+};
+
+i18next.init({
+  lng: 'en',
+  fallbackLng: 'en',
+  resources: {
+    en: { common: locales.en },
+  },
+});
+
+const i18n = new VueI18next(i18next);
+
+Vue.component('app', {
+  i18nOptions: { namespaces: 'common'},
+  template: `
+    <div>
+      <i18next path="term" tag="label">
+        <a href="#" target="_blank">{{ $t("tos") }}</a>
+        <strong>{{ $t("promise") }}</strong>
+      </i18next>
+    </div>`,
+});
+
+```
+
 ## Build Setup
 
 ``` bash

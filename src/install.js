@@ -12,7 +12,17 @@ export function install(_Vue) {
   Vue.mixin({
     computed: {
       $t() {
-        return (key, options) => this.$i18n.t(key, options, this.$i18n.i18nLoadedAt);
+        if (this.$options.i18nOptions) {
+          const { lng = null } = this.$options.i18nOptions;
+          let { namespaces } = this.$options.i18nOptions;
+          namespaces = namespaces || this.$i18n.i18next.options.defaultNS;
+          if (typeof namespaces === 'string') namespaces = [namespaces];
+          this.$i18n.i18next.loadNamespaces(namespaces);
+
+          const fixedT = this.$i18n.i18next.getFixedT(lng, namespaces);
+          return (key, options) => fixedT(key, options, this.$i18n.i18nLoadedAt);
+        }
+        return (key, options) => this.$i18n.i18next.t(key, options, this.$i18n.i18nLoadedAt);
       },
     },
 
