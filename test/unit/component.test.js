@@ -56,11 +56,39 @@ describe('Components namespaces', () => {
             ]);
           },
         },
+        child2: {
+          i18nOptions: { namespaces: 'common' },
+          components: {
+            'sub-child1': {
+              i18nOptions: { lng: 'de' },
+              render(h) {
+                return h('div', { }, [
+                  h('p', { ref: 'hello' }, [this.$t('hello')]),
+                ]);
+              },
+            },
+            'sub-child2': {
+              render(h) {
+                return h('div', { }, [
+                  h('p', { ref: 'key1' }, [this.$t('key1', { name: 'Waldo' })]),
+                ]);
+              },
+            },
+          },
+          render(h) {
+            return h('div', {}, [
+              h('p', { ref: 'hello' }, [this.$t('hello')]),
+              h('sub-child1', { ref: 'sub-child1' }),
+              h('sub-child2', { ref: 'sub-child2' }),
+            ]);
+          },
+        },
       },
       render(h) {
         return h('div', {}, [
           h('p', { ref: 'hello' }, [this.$t('hello')]),
           h('child1', { ref: 'child1' }),
+          h('child2', { ref: 'child2' }),
         ]);
       },
     }).$mount(el);
@@ -74,12 +102,19 @@ describe('Components namespaces', () => {
     const deHello = vm.$refs.child1.$refs['sub-child1'].$refs.hello;
     const commonHello = vm.$refs.child1.$refs['sub-child2'].$refs.key1;
 
+    // const child2Hello = vm.$refs.child2;
+    const child2Sub1 = vm.$refs.child2.$refs['sub-child1'].$refs.hello;
+    const child2Sub2 = vm.$refs.child2.$refs['sub-child2'].$refs.key1;
+
     backend.flush();
     await nextTick();
 
     expect(hello.textContent).to.equal('Hello');
     expect(deHello.textContent).to.equal('Hallo');
     expect(commonHello.textContent).to.equal('Hello Waldo');
+
+    expect(child2Sub1.textContent).to.equal('Hallo');
+    expect(child2Sub2.textContent).to.equal('Hello Waldo');
   });
 });
 
@@ -113,6 +148,7 @@ describe('Components with backend', () => {
 
     it('should render sub components correctly', async () => {
       const root = vm.$refs.hello;
+      expect(root.textContent).to.equal('key1');
       backend.flush();
       await nextTick();
 

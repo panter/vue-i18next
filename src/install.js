@@ -12,13 +12,8 @@ export function install(_Vue) {
   Vue.mixin({
     computed: {
       $t() {
-        if (this.$options.i18nOptions) {
-          const { lng = null } = this.$options.i18nOptions;
-          let { namespaces } = this.$options.i18nOptions;
-          namespaces = namespaces || this.$i18n.i18next.options.defaultNS;
-          if (typeof namespaces === 'string') namespaces = [namespaces];
-          this.$i18n.i18next.loadNamespaces(namespaces);
-
+        if (this._i18nOptions) {
+          const { lng, namespaces } = this._i18nOptions;
           const fixedT = this.$i18n.i18next.getFixedT(lng, namespaces);
           return (key, options) => fixedT(key, options, this.$i18n.i18nLoadedAt);
         }
@@ -32,6 +27,18 @@ export function install(_Vue) {
         this.$i18n = options.i18n;
       } else if (options.parent && options.parent.$i18n) {
         this.$i18n = options.parent.$i18n;
+      }
+
+      if (this.$i18n && this.$options.i18nOptions) {
+        const { lng = null } = this.$options.i18nOptions;
+        let { namespaces } = this.$options.i18nOptions;
+        namespaces = namespaces || this.$i18n.i18next.options.defaultNS;
+        if (typeof namespaces === 'string') namespaces = [namespaces];
+        this.$i18n.i18next.loadNamespaces(namespaces);
+
+        this._i18nOptions = { lng, namespaces };
+      } else if (this.$i18n && options.parent && options.parent._i18nOptions) {
+        this._i18nOptions = options.parent._i18nOptions;
       }
     },
   });
