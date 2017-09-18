@@ -108,4 +108,32 @@ describe('$t loaded languages', () => {
       expect(text.textContent).to.equal('Hello');
     });
   });
+
+  describe('prefix key', () => {
+    let vueI18Next;
+    beforeEach(() => {
+      vueI18Next = new VueI18Next(i18next);
+      i18next.init({
+        lng: 'en',
+        resources: {
+          en: { translation: { messages: { hello: 'Hello' } } },
+        },
+      });
+    });
+
+    it('should use the keyPrefix property', async () => {
+      const el = document.createElement('div');
+      const vm = new Vue({
+        i18n: vueI18Next,
+        i18nOptions: { keyPrefix: 'messages' },
+        render(h) {
+          return h('p', { ref: 'text' }, [this.$t('hello')]);
+        },
+      }).$mount(el);
+
+      const { text } = vm.$refs;
+      await nextTick();
+      expect(text.textContent).to.equal('Hello');
+    });
+  });
 });

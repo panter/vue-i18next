@@ -44,6 +44,10 @@ Vue.component('app', {
           <strong>a</strong>
         </i18next>
       </div>
+      <div>
+        <h3>Prefix</h3>
+        <key-prefix></key-prefix>
+      </div>
     </div>`,
 });
 
@@ -76,6 +80,16 @@ Vue.component('load-bundle', {
       this.$i18n.i18next.addResourceBundle('de', 'translation', locales.de);
     },
   },
+});
+
+Vue.component('key-prefix', {
+  i18nOptions: {
+    keyPrefix: 'message',
+  },
+  template: `
+    <div>
+      <p>{{$t('hello')}}</p>
+    </div>`,
 });
 
 new Vue({

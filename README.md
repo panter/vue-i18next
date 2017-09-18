@@ -210,6 +210,35 @@ Vue.component('app', {
 
 ```
 
+There is also the possibility to prefix what key the component is using.
+
+``` javascript
+
+const locales = {
+  en: {
+    message: {
+      hello: "Hello"
+    },
+  }
+};
+
+i18next.init({
+  ...
+});
+
+const i18n = new VueI18next(i18next);
+
+Vue.component('app', {
+  i18nOptions: { keyPrefix: 'message'},
+  template: `
+    <div>
+      <strong>{{ $t("hello") }}</strong>
+    </div>`,
+});
+
+```
+
+
 ## Build Setup
 
 ``` bash
