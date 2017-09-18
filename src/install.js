@@ -9,15 +9,26 @@ export function install(_Vue) {
 
   Vue = _Vue;
 
+  const getByKey = i18nOptions => (key) => {
+    if (i18nOptions && i18nOptions.keyPrefix) {
+      return `${i18nOptions.keyPrefix}.${key}`;
+    }
+    return key;
+  };
+
   Vue.mixin({
     computed: {
       $t() {
-        if (this._i18nOptions) {
+        const getKey = getByKey(this._i18nOptions);
+
+        if (this._i18nOptions && this._i18nOptions.namespaces) {
           const { lng, namespaces } = this._i18nOptions;
           const fixedT = this.$i18n.i18next.getFixedT(lng, namespaces);
-          return (key, options) => fixedT(key, options, this.$i18n.i18nLoadedAt);
+          return (key, options) => fixedT(getKey(key), options, this.$i18n.i18nLoadedAt);
         }
-        return (key, options) => this.$i18n.i18next.t(key, options, this.$i18n.i18nLoadedAt);
+
+        return (key, options) =>
+          this.$i18n.i18next.t(getKey(key), options, this.$i18n.i18nLoadedAt);
       },
     },
 
@@ -30,13 +41,13 @@ export function install(_Vue) {
       }
 
       if (this.$i18n && this.$options.i18nOptions) {
-        const { lng = null } = this.$options.i18nOptions;
+        const { lng = null, keyPrefix = null } = this.$options.i18nOptions;
         let { namespaces } = this.$options.i18nOptions;
         namespaces = namespaces || this.$i18n.i18next.options.defaultNS;
         if (typeof namespaces === 'string') namespaces = [namespaces];
         this.$i18n.i18next.loadNamespaces(namespaces);
 
-        this._i18nOptions = { lng, namespaces };
+        this._i18nOptions = { lng, namespaces, keyPrefix };
       } else if (this.$i18n && options.parent && options.parent._i18nOptions) {
         this._i18nOptions = options.parent._i18nOptions;
       }
