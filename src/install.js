@@ -9,8 +9,8 @@ export function install(_Vue) {
 
   Vue = _Vue;
 
-  const getByKey = i18nOptions => (key) => {
-    if (i18nOptions && i18nOptions.keyPrefix) {
+  const getByKey = (i18nOptions, i18nextOptions) => (key) => {
+    if (i18nOptions && i18nOptions.keyPrefix && !key.includes(i18nextOptions.nsSeparator)) {
       return `${i18nOptions.keyPrefix}.${key}`;
     }
     return key;
@@ -19,7 +19,7 @@ export function install(_Vue) {
   Vue.mixin({
     computed: {
       $t() {
-        const getKey = getByKey(this._i18nOptions);
+        const getKey = getByKey(this._i18nOptions, this.$i18n.i18next.options);
 
         if (this._i18nOptions && this._i18nOptions.namespaces) {
           const { lng, namespaces } = this._i18nOptions;
