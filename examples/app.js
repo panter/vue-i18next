@@ -48,6 +48,10 @@ Vue.component('app', {
         <h3>Prefix</h3>
         <key-prefix></key-prefix>
       </div>
+      <div>
+        <h3>Interpolation</h3>
+        <inline-translations></inline-translations>
+      </div>
     </div>`,
 });
 
@@ -89,6 +93,23 @@ Vue.component('key-prefix', {
   template: `
     <div>
       <p>{{$t('hello')}}</p>
+    </div>`,
+});
+
+Vue.component('inline-translations', {
+  i18nOptions: {
+    messages: {
+      en: {
+        welcome: 'Welcome!',
+      },
+      de: {
+        welcome: 'Guten Tag!',
+      },
+    },
+  },
+  template: `
+    <div>
+      {{$t('welcome')}}
     </div>`,
 });
 
