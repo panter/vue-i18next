@@ -46,6 +46,7 @@ export default class VueI18n {
 VueI18n.install = install;
 VueI18n.version = __VERSION__;
 
+/* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueI18n);
 }
