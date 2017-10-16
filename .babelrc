@@ -2,11 +2,11 @@
   "presets": [
     ["es2015"],
   ],
-  "plugins": ["babel-plugin-add-module-exports"],
+  "plugins": ["babel-plugin-add-module-exports", "transform-object-rest-spread"],
   "env": {
     "test": {
       "presets": ["es2015", "es2017"],
-      "plugins": ["istanbul"]
+      "plugins": ["transform-object-rest-spread", "istanbul"]
     }
   }
 }
