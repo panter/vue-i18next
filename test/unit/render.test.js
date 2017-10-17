@@ -116,7 +116,10 @@ describe('$t loaded languages', () => {
       i18next.init({
         lng: 'en',
         resources: {
-          en: { translation: { messages: { hello: 'Hello' } } },
+          en: {
+            translation: { messages: { hello: 'Hello' }, },
+            common: { goodbye: 'Goodbye' }
+          },
         },
       });
     });
@@ -134,6 +137,21 @@ describe('$t loaded languages', () => {
       const { text } = vm.$refs;
       await nextTick();
       expect(text.textContent).to.equal('Hello');
+    });
+
+    it('should ignore keyPrefix property if namespace prefix used', async () => {
+      const el = document.createElement('div');
+      const vm = new Vue({
+        i18n: vueI18Next,
+        i18nOptions: { keyPrefix: 'messages' },
+        render(h) {
+          return h('p', { ref: 'text' }, [this.$t('common:goodbye')]);
+        },
+      }).$mount(el);
+
+      const { text } = vm.$refs;
+      await nextTick();
+      expect(text.textContent).to.equal('Goodbye');
     });
   });
 });
