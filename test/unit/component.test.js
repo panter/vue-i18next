@@ -120,73 +120,118 @@ describe('Components namespaces', () => {
 
 
 describe('Component inline translation', () => {
-  const i18next1 = i18next.createInstance();
-  let vueI18Next;
-  let vm;
-  beforeEach((done) => {
-    i18next1.init({
-      lng: 'en',
-      resources: {
-        en: {
-          translation: { hello: 'Hello' },
+  describe('only with the i18n tag', () => {
+    const i18next1 = i18next.createInstance();
+    let vueI18Next;
+    let vm;
+    beforeEach((done) => {
+      i18next1.init({
+        lng: 'en',
+        resources: {
+          en: {},
         },
-        de: {
-          translation: { hello: 'Hallo' },
-        },
-      },
-    });
-    vueI18Next = new VueI18Next(i18next1);
+      });
+      vueI18Next = new VueI18Next(i18next1);
 
-    const el = document.createElement('div');
-    vm = new Vue({
-      i18n: vueI18Next,
-      i18nOptions: {
-        messages: {
+      const el = document.createElement('div');
+      vm = new Vue({
+        i18n: vueI18Next,
+        __i18n: [
+          JSON.stringify({
+            en: { yesNo: { yes: 'Yes', maybe: 'Maybe' } },
+          }),
+          JSON.stringify({
+            en: { yesNo: { no: 'No', maybe: 'Maybe?' } },
+          })],
+        render(h) {
+          return h('div', {}, [
+            h('p', { ref: 'yesNoYes' }, [this.$t('yesNo.yes')]),
+            h('p', { ref: 'yesNoMaybe' }, [this.$t('yesNo.maybe')]),
+            h('p', { ref: 'yesNoNo' }, [this.$t('yesNo.no')]),
+          ]);
+        },
+      }).$mount(el);
+
+
+      vm.$nextTick(done);
+    });
+
+    it('should use the translation in the tag', async () => {
+      expect(vm.$refs.yesNoYes.textContent).to.equal('Yes');
+      expect(vm.$refs.yesNoMaybe.textContent).to.equal('Maybe?');
+      expect(vm.$refs.yesNoNo.textContent).to.equal('No');
+    });
+  });
+
+  describe('full options', () => {
+    const i18next1 = i18next.createInstance();
+    let vueI18Next;
+    let vm;
+    beforeEach((done) => {
+      i18next1.init({
+        lng: 'en',
+        resources: {
           en: {
-            hello: 'Hello!',
-            welcome: 'Welcome!',
-            yesNo: {
-              no: 'No!',
+            translation: { hello: 'Hello' },
+          },
+          de: {
+            translation: { hello: 'Hallo' },
+          },
+        },
+      });
+      vueI18Next = new VueI18Next(i18next1);
+
+      const el = document.createElement('div');
+      vm = new Vue({
+        i18n: vueI18Next,
+        i18nOptions: {
+          messages: {
+            en: {
+              hello: 'Hello!',
+              welcome: 'Welcome!',
+              yesNo: {
+                no: 'No!',
+              },
             },
           },
         },
-      },
-      __i18n: [
-        JSON.stringify({
-          en: { yesNo: { yes: 'Yes', maybe: 'Maybe' } },
-        }),
-        JSON.stringify({
-          en: { yesNo: { no: 'No', maybe: 'Maybe?' } },
-        })],
-      render(h) {
-        return h('div', {}, [
-          h('p', { ref: 'welcome' }, [this.$t('welcome')]),
-          h('p', { ref: 'hello' }, [this.$t('hello')]),
-          h('p', { ref: 'yesNoYes' }, [this.$t('yesNo.yes')]),
-          h('p', { ref: 'yesNoMaybe' }, [this.$t('yesNo.maybe')]),
-          h('p', { ref: 'yesNoNo' }, [this.$t('yesNo.no')]),
-        ]);
-      },
-    }).$mount(el);
+        __i18n: [
+          JSON.stringify({
+            en: { yesNo: { yes: 'Yes', maybe: 'Maybe' } },
+          }),
+          JSON.stringify({
+            en: { yesNo: { no: 'No', maybe: 'Maybe?' } },
+          })],
+        render(h) {
+          return h('div', {}, [
+            h('p', { ref: 'welcome' }, [this.$t('welcome')]),
+            h('p', { ref: 'hello' }, [this.$t('hello')]),
+            h('p', { ref: 'yesNoYes' }, [this.$t('yesNo.yes')]),
+            h('p', { ref: 'yesNoMaybe' }, [this.$t('yesNo.maybe')]),
+            h('p', { ref: 'yesNoNo' }, [this.$t('yesNo.no')]),
+          ]);
+        },
+      }).$mount(el);
 
 
-    vm.$nextTick(done);
-  });
+      vm.$nextTick(done);
+    });
 
-  it('should use the inline translation if no other is found', async () => {
-    const root = vm.$refs.welcome;
-    expect(root.textContent).to.equal('Welcome!');
-  });
+    it('should use the inline translation if no other is found', async () => {
+      const root = vm.$refs.welcome;
+      expect(root.textContent).to.equal('Welcome!');
+    });
 
-  it('should use the inline translation only if none other is found', async () => {
-    const root = vm.$refs.hello;
-    expect(root.textContent).to.equal('Hello');
-  });
+    it('should use the inline translation only if none other is found', async () => {
+      const root = vm.$refs.hello;
+      expect(root.textContent).to.equal('Hello');
+    });
 
-  it('should use the __i18n options', async () => {
-    expect(vm.$refs.yesNoYes.textContent).to.equal('Yes');
-    expect(vm.$refs.yesNoMaybe.textContent).to.equal('Maybe?');
-    expect(vm.$refs.yesNoNo.textContent).to.equal('No!');
+    it('should use the __i18n options', async () => {
+      expect(vm.$refs.yesNoYes.textContent).to.equal('Yes');
+      expect(vm.$refs.yesNoMaybe.textContent).to.equal('Maybe?');
+      expect(vm.$refs.yesNoNo.textContent).to.equal('No!');
+    });
   });
 });
 
