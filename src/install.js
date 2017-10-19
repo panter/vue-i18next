@@ -68,6 +68,8 @@ export function install(_Vue) {
           this._i18nOptions = { lng, namespaces: namespacesToLoad, keyPrefix };
         } else if (options.parent && options.parent._i18nOptions) {
           this._i18nOptions = options.parent._i18nOptions;
+        } else if (options.__i18n) {
+          this._i18nOptions = { namespaces: namespacesToLoad };
         }
 
         const languages = Object.keys(inlineTranslations);
