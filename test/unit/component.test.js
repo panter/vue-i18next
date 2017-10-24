@@ -35,15 +35,13 @@ describe('Components namespaces', () => {
             'sub-child1': {
               i18nOptions: { lng: 'de' },
               render(h) {
-                return h('div', { }, [
-                  h('p', { ref: 'hello' }, [this.$t('hello')]),
-                ]);
+                return h('div', {}, [h('p', { ref: 'hello' }, [this.$t('hello')])]);
               },
             },
             'sub-child2': {
               i18nOptions: { namespaces: 'common' },
               render(h) {
-                return h('div', { }, [
+                return h('div', {}, [
                   h('p', { ref: 'key1' }, [this.$t('key1', { name: 'Waldo' })]),
                 ]);
               },
@@ -62,14 +60,12 @@ describe('Components namespaces', () => {
             'sub-child1': {
               i18nOptions: { lng: 'de' },
               render(h) {
-                return h('div', { }, [
-                  h('p', { ref: 'hello' }, [this.$t('hello')]),
-                ]);
+                return h('div', {}, [h('p', { ref: 'hello' }, [this.$t('hello')])]);
               },
             },
             'sub-child2': {
               render(h) {
-                return h('div', { }, [
+                return h('div', {}, [
                   h('p', { ref: 'key1' }, [this.$t('key1', { name: 'Waldo' })]),
                 ]);
               },
@@ -92,7 +88,6 @@ describe('Components namespaces', () => {
         ]);
       },
     }).$mount(el);
-
 
     vm.$nextTick(done);
   });
@@ -118,7 +113,6 @@ describe('Components namespaces', () => {
   });
 });
 
-
 describe('Component inline translation', () => {
   describe('only with the i18n tag', () => {
     const i18next1 = i18next.createInstance();
@@ -142,7 +136,8 @@ describe('Component inline translation', () => {
           }),
           JSON.stringify({
             en: { yesNo: { no: 'No', maybe: 'Maybe?' } },
-          })],
+          }),
+        ],
         render(h) {
           return h('div', {}, [
             h('p', { ref: 'yesNoYes' }, [this.$t('yesNo.yes')]),
@@ -151,7 +146,6 @@ describe('Component inline translation', () => {
           ]);
         },
       }).$mount(el);
-
 
       vm.$nextTick(done);
     });
@@ -201,7 +195,8 @@ describe('Component inline translation', () => {
           }),
           JSON.stringify({
             en: { yesNo: { no: 'No', maybe: 'Maybe?' } },
-          })],
+          }),
+        ],
         render(h) {
           return h('div', {}, [
             h('p', { ref: 'welcome' }, [this.$t('welcome')]),
@@ -212,7 +207,6 @@ describe('Component inline translation', () => {
           ]);
         },
       }).$mount(el);
-
 
       vm.$nextTick(done);
     });
@@ -252,12 +246,9 @@ describe('Components with backend', () => {
         i18nOptions: { namespaces: 'common' },
 
         render(h) {
-          return h('div', {}, [
-            h('p', { ref: 'hello' }, [this.$t('key1')]),
-          ]);
+          return h('div', {}, [h('p', { ref: 'hello' }, [this.$t('key1')])]);
         },
       }).$mount(el);
-
 
       vm.$nextTick(done);
     });
@@ -292,17 +283,13 @@ describe('Components with backend', () => {
               'sub-child1': {
                 i18nOptions: { lng: 'de' },
                 render(h) {
-                  return h('div', { }, [
-                    h('p', { ref: 'key11' }, [this.$t('key1')]),
-                  ]);
+                  return h('div', {}, [h('p', { ref: 'key11' }, [this.$t('key1')])]);
                 },
               },
               'sub-child2': {
                 i18nOptions: { namespaces: 'common' },
                 render(h) {
-                  return h('div', { }, [
-                    h('p', { ref: 'key12' }, [this.$t('key1')]),
-                  ]);
+                  return h('div', {}, [h('p', { ref: 'key12' }, [this.$t('key1')])]);
                 },
               },
             },
@@ -310,17 +297,15 @@ describe('Components with backend', () => {
               return h('div', {}, [
                 h('sub-child1', { ref: 'sub-child1' }),
                 h('sub-child2', { ref: 'sub-child2' }),
+                h('sub-child2', { ref: 'sub-child3' }),
               ]);
             },
           },
         },
         render(h) {
-          return h('div', {}, [
-            h('child1', { ref: 'child1' }),
-          ]);
+          return h('div', {}, [h('child1', { ref: 'child1' })]);
         },
       }).$mount(el);
-
 
       vm.$nextTick(done);
     });
