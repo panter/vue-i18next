@@ -5,7 +5,9 @@ import component from './component';
 export let Vue;
 
 export function install(_Vue) {
-  if (install.installed) { return; }
+  if (install.installed) {
+    return;
+  }
   install.installed = true;
 
   Vue = _Vue;
@@ -44,8 +46,8 @@ export function install(_Vue) {
       let inlineTranslations = {};
 
       if (this.$i18n) {
-        const namespace = options.name || `${Math.random()}`;
-        let namespacesToLoad = [namespace];
+        const getNamespace = this.$i18n.options.getComponentNamespace || getComponentNamespace;
+        const { namespace, loadNamespace } = getNamespace(this);
 
         if (options.__i18n) {
           options.__i18n.forEach((resource) => {
@@ -53,7 +55,6 @@ export function install(_Vue) {
           });
         }
 
-        if (this.$options.i18nOptions) {
           const { lng = null, keyPrefix = null, messages } = this.$options.i18nOptions;
           let { namespaces } = this.$options.i18nOptions;
           namespaces = namespaces || this.$i18n.i18next.options.defaultNS;
