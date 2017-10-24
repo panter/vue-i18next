@@ -1,3 +1,5 @@
+import sinon from 'sinon';
+
 function nextTick() {
   return new Promise(resolve => Vue.nextTick(resolve));
 }
@@ -77,7 +79,6 @@ describe('$t loaded languages', () => {
     });
   });
 
-
   describe('do not bind any listeners', () => {
     let vueI18Next;
     beforeEach(() => {
@@ -117,8 +118,8 @@ describe('$t loaded languages', () => {
         lng: 'en',
         resources: {
           en: {
-            translation: { messages: { hello: 'Hello' }, },
-            common: { goodbye: 'Goodbye' }
+            translation: { messages: { hello: 'Hello' } },
+            common: { goodbye: 'Goodbye' },
           },
         },
       });
