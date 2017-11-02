@@ -36,7 +36,7 @@ export function install(_Vue) {
   Vue.mixin({
     computed: {
       $t() {
-        const getKey = getByKey(this._i18nOptions, this.$i18n.i18next.options);
+        const getKey = getByKey(this._i18nOptions, this.$i18n ? this.$i18n.i18next.options : {});
 
         if (this._i18nOptions && this._i18nOptions.namespaces) {
           const { lng, namespaces } = this._i18nOptions;
