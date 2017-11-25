@@ -16,6 +16,9 @@ export default {
     if (!i18next) {
       return h(props.tag, data, children);
     }
+    if (!i18next.i18nLoaded) {
+      return h(props.tag, data, []);
+    }
 
     const path = props.path;
 
@@ -30,7 +33,16 @@ export default {
 
         child = match;
       } else {
-        child = children[parseInt(match, 10)];
+        const place = match.trim();
+        if (isNaN(parseFloat(place)) || !isFinite(place)) {
+          children.forEach((e) => {
+            if (!child && e.data.attrs && e.data.attrs.place && e.data.attrs.place === place) {
+              child = e;
+            }
+          });
+        } else {
+          child = children[parseInt(match, 10)];
+        }
       }
 
       memo.push(child);
