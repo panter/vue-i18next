@@ -16,6 +16,9 @@ export default {
     if (!i18next) {
       return h(props.tag, data, children);
     }
+    if (!i18next.i18nLoaded) {
+      return h(props.tag, data, []);
+    }
 
     const path = props.path;
 
