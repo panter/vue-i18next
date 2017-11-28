@@ -155,6 +155,56 @@ describe('Component inline translation', () => {
       expect(vm.$refs.yesNoMaybe.textContent).to.equal('Maybe?');
       expect(vm.$refs.yesNoNo.textContent).to.equal('No');
     });
+
+    it('should use the translation in the tag', async () => {
+      expect(vm.$refs.yesNoYes.textContent).to.equal('Yes');
+      expect(vm.$refs.yesNoMaybe.textContent).to.equal('Maybe?');
+      expect(vm.$refs.yesNoNo.textContent).to.equal('No');
+    });
+
+    describe('should work with parents', () => {
+      beforeEach((done) => {
+        i18next1.init({
+          lng: 'en',
+          resources: {
+            en: {},
+          },
+        });
+        vueI18Next = new VueI18Next(i18next1);
+
+        const el = document.createElement('div');
+        vm = new Vue({
+          i18n: vueI18Next,
+          i18nOptions: {},
+          name: 'main-comp',
+          components: {
+            child: {
+              name: 'child',
+              render(h) {
+                return h('div', {}, [h('p', { ref: 'yesNoYes' }, [this.$t('yesNo.yes')])]);
+              },
+            },
+          },
+          __i18n: [
+            JSON.stringify({
+              en: { yesNo: { yes: 'Yes', maybe: 'Maybe' } },
+            }),
+            JSON.stringify({
+              en: { yesNo: { no: 'No', maybe: 'Maybe?' } },
+            }),
+          ],
+          render(h) {
+            return h('child', { ref: 'subChild' });
+          },
+        }).$mount(el);
+
+        vm.$nextTick(done);
+      });
+
+      it('should merge namespaces even if parent has none', async () => {
+        expect(vm.$refs.subChild.$refs.yesNoYes.textContent).to.equal('Yes');
+      });
+    });
   });
 
   describe('full options', () => {
