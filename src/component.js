@@ -30,7 +30,16 @@ export default {
 
         child = match;
       } else {
-        child = children[parseInt(match, 10)];
+        const place = match.trim();
+        if (isNaN(parseFloat(place)) || !isFinite(place)) {
+          children.forEach((e) => {
+            if (!child && e.data.attrs && e.data.attrs.place && e.data.attrs.place === place) {
+              child = e;
+            }
+          });
+        } else {
+          child = children[parseInt(match, 10)];
+        }
       }
 
       memo.push(child);
