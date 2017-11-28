@@ -84,7 +84,8 @@ export function install(_Vue) {
           this._i18nOptions = { lng, namespaces: namespacesToLoad, keyPrefix };
           this.$i18n.i18next.loadNamespaces(namespaces);
         } else if (options.parent && options.parent._i18nOptions) {
-          this._i18nOptions = options.parent._i18nOptions;
+          this._i18nOptions = { ...options.parent._i18nOptions };
+          this._i18nOptions.namespaces = [namespace, ...this._i18nOptions.namespaces];
         } else if (options.__i18n) {
           this._i18nOptions = { namespaces: [namespace] };
         }
