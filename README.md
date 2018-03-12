@@ -70,7 +70,7 @@ i18next.init({
   },
 });
 
-const i18n = new VueI18next(i18n);
+const i18n = new VueI18next(i18next);
 
 new Vue({
   i18n,
