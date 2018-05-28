@@ -247,6 +247,8 @@ Vue.component('app', {
 
 ### Single file components
 
+by [@kazupon](https://github.com/kazupon)
+
 ```html
 <i18n>
   {
