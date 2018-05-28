@@ -14,12 +14,12 @@ Source can be loaded via
 $ npm install @panter/vue-i18next
 ```
 
-- If you don't use a module loader it will be added to `window.VueI18next`
+* If you don't use a module loader it will be added to `window.VueI18next`
 
 ### Requirements
 
-- vue >= __2.0.0__
-- i18next >= __6.0.1__
+* vue >= **2.0.0**
+* i18next >= **6.0.1**
 
 ## Usage
 
@@ -27,8 +27,7 @@ Check the [DEMO](https://panter.github.io/vue-i18next/examples/) to see `vue-i18
 
 ### Init
 
-``` javascript
-
+```javascript
 import Vue from 'vue';
 import i18next from 'i18next';
 import VueI18Next from '@panter/vue-i18next';
@@ -51,31 +50,26 @@ new Vue({
 
 ### Init direct in Browser
 
-
-``` html
-
+```html
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/i18next@8.0.0/i18next.js"></script>
 <script src="vue-i18next.js"></script>
-
 ```
 
-``` javascript
-
+```javascript
 i18next.init({
-  lng: 'en',
+  lng: "en",
   resources: {
     en: { translation: locales.en },
-    de: { translation: locales.de },
-  },
+    de: { translation: locales.de }
+  }
 });
 
-const i18n = new VueI18next(i18n);
+const i18n = new VueI18next(i18next);
 
 new Vue({
-  i18n,
-}).$mount('#app');
-
+  i18n
+}).$mount("#app");
 ```
 
 ### $t
@@ -84,8 +78,7 @@ The `$t` function is a wrapper for `i18next.t`.
 
 Check [i18next](http://i18next.com/translate/#basictranslation) documentation for more informations.
 
-``` javascript
-
+```javascript
 const locales = {
   en: {
     loadbundle: 'Load bundle language: {{lang}}',
@@ -111,109 +104,100 @@ Vue.component('app', {
       lang: 'DE',
     };
 });
-
 ```
 
 ### find i18n in the context
-``` javascript
 
-Vue.component('language-changer', {
-  template: '<div><a v-on:click="changeLanguage(\'de\')">DE</a></div>',
+```javascript
+Vue.component("language-changer", {
+  template: "<div><a v-on:click=\"changeLanguage('de')\">DE</a></div>",
   methods: {
     changeLanguage(lang) {
       this.$i18n.i18next.changeLanguage(lang);
-    },
-  },
+    }
+  }
 });
-
 ```
 
-
 ### Change Language
-``` javascript
+
+```javascript
 import i18next from 'i18next';
 
 ...
 
 i18next.changeLanguage('it');
-
 ```
-
 
 ### Component interpolation
 
-``` javascript
-
+```javascript
 const locales = {
   en: {
-    tos: 'Term of Service',
-    term: 'I accept {{0}}. {{1}}.',
-    promise: 'I promise',
+    tos: "Term of Service",
+    term: "I accept {{0}}. {{1}}.",
+    promise: "I promise"
   }
 };
 
 i18next.init({
-  lng: 'en',
+  lng: "en",
   resources: {
-    en: { translation: locales.en },
-  },
+    en: { translation: locales.en }
+  }
 });
 
 const i18n = new VueI18next(i18next);
 
-Vue.component('app', {
+Vue.component("app", {
   template: `
     <div>
       <i18next path="term" tag="label">
         <a href="#" target="_blank">{{ $t("tos") }}</a>
         <strong>{{ $t("promise") }}</strong>
       </i18next>
-    </div>`,
+    </div>`
 });
-
 ```
 
 ### i18nOptions
 
 The namespace will be loaded with (loadNamespaces)[http://i18next.com/docs/api/#load-namespaces],so one can lazy load namespaces for components.
 
-``` javascript
-
+```javascript
 const locales = {
   en: {
-    tos: 'Term of Service',
-    term: 'I accept {{0}}. {{1}}.',
-    promise: 'I promise',
+    tos: "Term of Service",
+    term: "I accept {{0}}. {{1}}.",
+    promise: "I promise"
   }
 };
 
 i18next.init({
-  lng: 'en',
-  fallbackLng: 'en',
+  lng: "en",
+  fallbackLng: "en",
   resources: {
-    en: { common: locales.en },
-  },
+    en: { common: locales.en }
+  }
 });
 
 const i18n = new VueI18next(i18next);
 
-Vue.component('app', {
-  i18nOptions: { namespaces: 'common'},
+Vue.component("app", {
+  i18nOptions: { namespaces: "common" },
   template: `
     <div>
       <i18next path="term" tag="label">
         <a href="#" target="_blank">{{ $t("tos") }}</a>
         <strong>{{ $t("promise") }}</strong>
       </i18next>
-    </div>`,
+    </div>`
 });
-
 ```
 
 There is also the possibility to prefix what key the component is using.
 
-``` javascript
-
+```javascript
 const locales = {
   en: {
     message: {
@@ -235,13 +219,11 @@ Vue.component('app', {
       <strong>{{ $t("hello") }}</strong>
     </div>`,
 });
-
 ```
 
 Translations can not only be defined in translation files but also in the `i18nOptions`.
 
-``` javascript
-
+```javascript
 i18next.init({
   ...
 });
@@ -261,14 +243,11 @@ Vue.component('app', {
       <strong>{{ $t("hello") }}</strong>
     </div>`,
 });
-
 ```
 
 ### Single file components
 
-
-``` html
-
+```html
 <i18n>
   {
     "en": {
@@ -288,20 +267,15 @@ Vue.component('app', {
     name: 'app',
   }
 </script>
-
 ```
 
 To be able to use the `<i18>` you need to use the vue-loader:
 
 ```
-
 npm install @kazupon/vue-i18n-loader --save-dev
-
-
 ```
 
 ```
-
 module.exports = {
   // ...
   module: {
@@ -321,19 +295,15 @@ module.exports = {
   },
   // ...
 }
-
 ```
 
 Use it with YAML:
 
 ```
-
 npm install yaml-loader --save-dev
-
 ```
 
-``` html
-
+```html
 <i18n>
 
 en:
@@ -342,37 +312,33 @@ en:
 </i18n>
 ```
 
-``` javascript
-
+```javascript
 module.exports = {
   // ...
   module: {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
+        loader: "vue-loader",
         options: {
           preLoaders: {
-            i18n: 'yaml-loader'
+            i18n: "yaml-loader"
           },
           loaders: {
-            i18n: '@kazupon/vue-i18n-loader'
+            i18n: "@kazupon/vue-i18n-loader"
           }
         }
-      },
+      }
       // ...
     ]
-  },
+  }
   // ...
-}
-
-
+};
 ```
-
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 yarn install
 
