@@ -35,6 +35,10 @@
     conventional-changelog "0.0.17"
     github-url-from-git "^1.4.0"
 
+"@types/i18next@^8.4.3":
+  version "8.4.3"
+  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-8.4.3.tgz#9136a9551bf5bf7169aa9f3125c1743f1f8dd6de"
+
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.0.9.tgz#91b4792588a7738c25f35dd6f63752a2f8776135"
@@ -5962,6 +5966,10 @@ typedarray@^0.0.6, typedarray@~0.0.5:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+typescript@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.8.3.tgz#5d817f9b6f31bb871835f4edf0089f21abe6c170"
+
 uglify-js@^2.6, uglify-js@^2.8.5:
   version "2.8.23"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.23.tgz#8230dd9783371232d62a7821e2cf9a817270a8a0"
@@ -6121,6 +6129,10 @@ void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-class-component@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-6.2.0.tgz#7adb1daa9a868c75f30f97f33f4f1b94aee62089"
+
 vue-hot-reload-api@^2.0.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
@@ -6159,9 +6171,9 @@ vue-template-es2015-compiler@^1.2.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.2.tgz#a0a6c50c941d2a4abda963f2f42c337ac450ee95"
 
-vue@^2.2.0:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.3.2.tgz#9e52aae3593480be235ff227557837e69f98203a"
+vue@^2.4.0:
+  version "2.5.16"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 
 walk@^2.3.9:
   version "2.3.9"
