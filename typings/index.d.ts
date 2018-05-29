@@ -2,7 +2,7 @@ import { i18n, TranslationFunction, TranslationOptions } from "i18next";
 import Vue, { PluginFunction } from "vue";
 
 declare class VueI18Next {
-  constructor(i18next: i18n, options: VueI18NextOptions);
+  constructor(i18next: i18n, options?: VueI18NextOptions);
   i18next: i18n;
   t: TranslationFunction;
   resetVm: ({  }: { i18nLoadedAt: Date }) => void;
