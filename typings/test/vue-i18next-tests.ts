@@ -16,7 +16,8 @@ i18next.init({
   lng: "de",
   resources: {}
 });
-const i18n = new VueI18Next(i18next, {});
+const i18n = new VueI18Next(i18next);
+const i18nWithOptions = new VueI18Next(i18next, {});
 
 const vm = new Vue({
   i18n
