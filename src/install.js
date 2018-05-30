@@ -1,6 +1,7 @@
 /* eslint-disable import/no-mutable-exports */
 import deepmerge from 'deepmerge';
 import component from './component';
+import { bind, update } from './directive';
 
 export let Vue;
 
@@ -13,7 +14,11 @@ export function install(_Vue) {
   Vue = _Vue;
 
   const getByKey = (i18nOptions, i18nextOptions) => (key) => {
-    if (i18nOptions && i18nOptions.keyPrefix && !key.includes(i18nextOptions.nsSeparator)) {
+    if (
+      i18nOptions &&
+      i18nOptions.keyPrefix &&
+      !key.includes(i18nextOptions.nsSeparator)
+    ) {
       return `${i18nOptions.keyPrefix}.${key}`;
     }
     return key;
@@ -36,13 +41,17 @@ export function install(_Vue) {
   Vue.mixin({
     computed: {
       $t() {
-        const getKey = getByKey(this._i18nOptions, this.$i18n ? this.$i18n.i18next.options : {});
+        const getKey = getByKey(
+          this._i18nOptions,
+          this.$i18n ? this.$i18n.i18next.options : {},
+        );
 
         if (this._i18nOptions && this._i18nOptions.namespaces) {
           const { lng, namespaces } = this._i18nOptions;
 
           const fixedT = this.$i18n.i18next.getFixedT(lng, namespaces);
-          return (key, options) => fixedT(getKey(key), options, this.$i18n.i18nLoadedAt);
+          return (key, options) =>
+            fixedT(getKey(key), options, this.$i18n.i18nLoadedAt);
         }
 
         return (key, options) =>
@@ -60,17 +69,25 @@ export function install(_Vue) {
       let inlineTranslations = {};
 
       if (this.$i18n) {
-        const getNamespace = this.$i18n.options.getComponentNamespace || getComponentNamespace;
+        const getNamespace =
+          this.$i18n.options.getComponentNamespace || getComponentNamespace;
         const { namespace, loadNamespace } = getNamespace(this);
 
         if (options.__i18n) {
           options.__i18n.forEach((resource) => {
-            inlineTranslations = deepmerge(inlineTranslations, JSON.parse(resource));
+            inlineTranslations = deepmerge(
+              inlineTranslations,
+              JSON.parse(resource),
+            );
           });
         }
 
         if (options.i18nOptions) {
-          const { lng = null, keyPrefix = null, messages } = this.$options.i18nOptions;
+          const {
+            lng = null,
+            keyPrefix = null,
+            messages,
+          } = this.$options.i18nOptions;
           let { namespaces } = this.$options.i18nOptions;
           namespaces = namespaces || this.$i18n.i18next.options.defaultNS;
 
@@ -85,7 +102,10 @@ export function install(_Vue) {
           this.$i18n.i18next.loadNamespaces(namespaces);
         } else if (options.parent && options.parent._i18nOptions) {
           this._i18nOptions = { ...options.parent._i18nOptions };
-          this._i18nOptions.namespaces = [namespace, ...this._i18nOptions.namespaces];
+          this._i18nOptions.namespaces = [
+            namespace,
+            ...this._i18nOptions.namespaces,
+          ];
         } else if (options.__i18n) {
           this._i18nOptions = { namespaces: [namespace] };
         }
@@ -109,4 +129,5 @@ export function install(_Vue) {
   });
 
   Vue.component(component.name, component);
+  Vue.directive('t', { bind, update });
 }

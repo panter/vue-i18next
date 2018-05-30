@@ -1,3 +1,4 @@
 {
-  "javascript.implicitProjectConfig.experimentalDecorators": true
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "eslint.autoFixOnSave": true
 }
