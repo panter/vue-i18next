@@ -16,6 +16,8 @@ describe('interpolation', () => {
               hello1: 'Hello {{0}} {{1}}',
               hello2: 'Hello {{1}} {{0}}.',
               hello3: 'Hello {{first}} {{second}}.',
+              counter: '{{0}} singular',
+              counter_plural: '{{0}} plural',
             },
           },
         },
@@ -68,6 +70,21 @@ describe('interpolation', () => {
     });
 
     it('should interpolate components by place', async () => {
+      const el = document.createElement('div');
+      const vm = new Vue({
+        i18n: vueI18Next,
+        render(h) {
+          return h('i18next', { ref: 'text', props: { tag: 'div', path: 'counter', options: { count: 2 } } }, [
+            h('p', { domProps: { textContent: 'Counter' } }),
+          ]);
+        },
+      }).$mount(el);
+
+      await nextTick();
+      expect(vm.$el.outerHTML).to.equal('<div><p>Counter</p> plural</div>');
+    });
+
+    it('should interpolate components supporting plurals', async () => {
       const el = document.createElement('div');
       const vm = new Vue({
         i18n: vueI18Next,
