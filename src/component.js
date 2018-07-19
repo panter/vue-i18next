@@ -35,7 +35,7 @@ export default {
         const place = match.trim();
         if (isNaN(parseFloat(place)) || !isFinite(place)) {
           children.forEach((e) => {
-            if (!child && e.data.attrs && e.data.attrs.place && e.data.attrs.place === place) {
+            if (!child && e.data && e.data.attrs && e.data.attrs.place && e.data.attrs.place === place) {
               child = e;
             }
           });
