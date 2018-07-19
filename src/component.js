@@ -7,9 +7,11 @@ export default {
       default: 'span',
     },
     path: {
-      type: String,
-      required: true,
+      type: String
     },
+    format: {
+      type: String
+    }
   },
   render(h, { props, data, children, parent }) {
     const i18next = parent.$i18n;
@@ -20,7 +22,7 @@ export default {
     const path = props.path;
 
     const REGEXP = i18next.i18next.services.interpolator.regexp;
-    const format = i18next.t(path, { interpolation: { prefix: '#$?', suffix: '?$#' } });
+    const format = props.format || i18next.t(path, { interpolation: { prefix: '#$?', suffix: '?$#' } });
     const tchildren = [];
 
     format.split(REGEXP).reduce((memo, match, index) => {
