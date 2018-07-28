@@ -1,5 +1,4 @@
 import sinon from 'sinon';
-import { t } from '../../src/directive';
 
 function nextTick() {
   return new Promise(resolve => Vue.nextTick(resolve));
@@ -29,7 +28,7 @@ describe('directive', () => {
       });
     });
 
-    it('should if value is only a key', async () => {
+    it('if value is only a key', async () => {
       const el = document.createElement('div');
       const vm = new Vue({
         i18n: vueI18Next,
@@ -214,7 +213,7 @@ describe('directive', () => {
 
     it('value warning', async () => {
       const el = document.createElement('div');
-      const spy = sinon.spy(console, 'log');
+      const spy = sinon.spy(console, 'warn');
       new Vue({
         i18n: vueI18Next,
         render(h) {
@@ -241,7 +240,7 @@ describe('directive', () => {
 
     it('path warning', async () => {
       const el = document.createElement('div');
-      const spy = sinon.spy(console, 'log');
+      const spy = sinon.spy(console, 'warn');
       new Vue({
         i18n: vueI18Next,
         render(h) {
@@ -268,7 +267,7 @@ describe('directive', () => {
 
     it('vuei18Next instance warning', async () => {
       const el = document.createElement('div');
-      const spy = sinon.spy(console, 'log');
+      const spy = sinon.spy(console, 'warn');
       new Vue({
         render(h) {
           // <p ref="text" v-t="{ language: 'de', args: { name: 'Hans' } }"></p>
