@@ -1,4 +1,6 @@
-/* eslint-disable no-param-reassign, no-console, no-unused-vars */
+/* eslint-disable no-param-reassign, no-unused-vars */
+
+import { warn, deprecate } from './utils';
 
 function equalLanguage(el, vnode) {
   const vm = vnode.context;
@@ -21,7 +23,7 @@ function assert(vnode) {
   const vm = vnode.context;
 
   if (!vm.$i18n) {
-    console.log('No VueI18Next instance found in the Vue instance');
+    warn('No VueI18Next instance found in the Vue instance');
     return false;
   }
 
@@ -49,19 +51,22 @@ function t(el, binding, vnode) {
 
   const { path, language, args } = parseValue(value);
   if (!path && !language && !args) {
-    console.log('v-t: invalid value');
+    warn('v-t: invalid value');
     return;
   }
 
   if (!path) {
-    console.log('v-t: `path` is required');
+    warn('v-t: "path" is required');
     return;
   }
 
+  if (language) {
+    deprecate(`v-t: "language" is deprecated.Use the "lng" property in args.
+      https://www.i18next.com/overview/configuration-options#configuration-options`);
+  }
+
   const vm = vnode.context;
-  el.textContent = language
-    ? vm.$i18n.i18next.getFixedT(language)(path, args)
-    : vm.$i18n.i18next.t(path, args);
+  el.textContent = vm.$i18n.i18next.t(path, { ...(language ? { lng: language } : {}), ...args });
 
   el._i18nLanguage = vm.$i18n.i18next.language;
 }
