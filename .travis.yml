@@ -1,7 +1,8 @@
 language: node_js
 node_js:
-  - "6"
+  - "8"
 cache: yarn
 after_success:
+- ./deploy-docs.sh
 - npm run semantic-release
 - npm run coveralls

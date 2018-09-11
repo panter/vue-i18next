@@ -31,8 +31,9 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "coveralls": "cat ./test/coverage/lcov.info | coveralls",
     "test:types": "tsc -p typings",
-    "docs:prepare": "gitbook install",
-    "docs:watch": "npm run docs:prepare && gitbook serve"
+    "docs:dev": "vuepress dev docs",
+    "docs:clean": "rm -rf docs/.vuepress/**",
+    "docs:build": "vuepress build docs"
   },
   "main": "./dist/vue-i18next.js",
   "types": "typings/index.d.ts",
@@ -63,9 +64,6 @@
     "eslint-plugin-react": "^6.8.0",
     "file-loader": "^0.9.0",
     "gh-pages": "^1.0.0",
-    "gitbook-cli": "^2.3.2",
-    "gitbook-plugin-sitemap": "^1.2.0",
-    "gitbook-plugin-theme-official": "^2.1.1",
     "i18next": "^6.0.1",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
@@ -98,6 +96,7 @@
     "vue-class-component": "^6.2.0",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.1.0",
+    "vuepress": "^0.13.0",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
   },
