@@ -30,7 +30,10 @@
     "gh-pages-publish": "gh-pages -d gh-pages",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "coveralls": "cat ./test/coverage/lcov.info | coveralls",
-    "test:types": "tsc -p typings"
+    "test:types": "tsc -p typings",
+    "docs:dev": "vuepress dev docs",
+    "docs:clean": "rm -rf docs/.vuepress/**",
+    "docs:build": "vuepress build docs"
   },
   "main": "./dist/vue-i18next.js",
   "types": "typings/index.d.ts",
@@ -89,10 +92,11 @@
     "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0",
     "typescript": "^2.8.3",
-    "vue": "^2.4.0",
+    "vue": "^2.5.16",
     "vue-class-component": "^6.2.0",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.1.0",
+    "vuepress": "^0.13.0",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
   },
