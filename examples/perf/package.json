@@ -9,13 +9,13 @@
     "setup:clean": "cd plain && rm -rf ./node_modules ./package-lock.json && cd ../method && rm -rf ./node_modules ./package-lock.json && cd ../directive && rm -rf ./node_modules ./package-lock.json && cd ../",
     "build": "cd plain && npm run build && cd ../method && npm run build && cd ../directive && npm run build && cd ../",
     "perform": "node ./index.js",
-    "serve": "serve ./",
+    "serve": "serve ./ -l 5000",
     "clean": "rm -rf ./generate/*.json ./generate/*.png"
   },
   "author": "Claudio Romano <cro@panter.ch>",
   "license": "MIT",
   "dependencies": {
     "puppeteer": "^0.10.2",
-    "serve": "^6.5.8"
+    "serve": "^7.0.0"
   }
 }
