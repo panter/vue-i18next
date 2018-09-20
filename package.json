@@ -21,17 +21,14 @@
   "scripts": {
     "prepublish": "npm run build",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build":
-      "cross-env NODE_ENV=production webpack --progress --hide-modules --debug && npm run build:lib",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --debug && npm run build:lib",
     "build:lib": "rimraf ./lib && babel src --out-dir lib",
     "lint": "eslint src/**.js",
     "test": "npm run lint && npm run test:unit && npm run test:types",
     "test:unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js",
-    "gh-pages":
-      "npm run build && rimraf ./gh-pages && mkdirp ./gh-pages/examples mkdirp ./gh-pages/dist && ncp ./examples ./gh-pages/examples && ncp ./dist ./gh-pages/dist",
+    "gh-pages": "npm run build && rimraf ./gh-pages && mkdirp ./gh-pages/examples mkdirp ./gh-pages/dist && ncp ./examples ./gh-pages/examples && ncp ./dist ./gh-pages/dist",
     "gh-pages-publish": "gh-pages -d gh-pages",
-    "semantic-release":
-      "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "coveralls": "cat ./test/coverage/lcov.info | coveralls",
     "test:types": "tsc -p typings"
   },
