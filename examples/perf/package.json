@@ -15,7 +15,7 @@
   "author": "Claudio Romano <cro@panter.ch>",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^0.10.2",
+    "puppeteer": "^1.8.0  ",
     "serve": "^7.0.0"
   }
 }
