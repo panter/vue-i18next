@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Component based localization | @panter/vue-i18next</title>
+    <meta name="description" content="i18next wrapper for vue">
+    <meta name="theme-color" content="#3eaf7c">
+    
+    <link rel="preload" href="/vue-i18next/assets/css/0.styles.ad8aeb5c.css" as="style"><link rel="preload" href="/vue-i18next/assets/js/app.03fc2ba8.js" as="script"><link rel="preload" href="/vue-i18next/assets/js/6.10f9e706.js" as="script"><link rel="prefetch" href="/vue-i18next/assets/js/2.0f0361a0.js"><link rel="prefetch" href="/vue-i18next/assets/js/3.395b5528.js"><link rel="prefetch" href="/vue-i18next/assets/js/4.3963ee94.js"><link rel="prefetch" href="/vue-i18next/assets/js/5.ac2c21e4.js"><link rel="prefetch" href="/vue-i18next/assets/js/7.b57482f9.js"><link rel="prefetch" href="/vue-i18next/assets/js/8.389cb04b.js"><link rel="prefetch" href="/vue-i18next/assets/js/9.6d979340.js"><link rel="prefetch" href="/vue-i18next/assets/js/10.6b716791.js"><link rel="prefetch" href="/vue-i18next/assets/js/11.d5b99a66.js"><link rel="prefetch" href="/vue-i18next/assets/js/12.3d2f5afe.js"><link rel="prefetch" href="/vue-i18next/assets/js/13.5b5e361a.js"><link rel="prefetch" href="/vue-i18next/assets/js/14.014f5918.js">
+    <link rel="stylesheet" href="/vue-i18next/assets/css/0.styles.ad8aeb5c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-i18next/" class="home-link router-link-active"><!----> <span class="site-name">@panter/vue-i18next</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-i18next/guide/started.html" class="nav-link">Guide</a></div><div class="nav-item"><a href="https://github.com/panter/vue-i18next/releases" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Release Notes
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/panter/vue-i18next" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-i18next/guide/started.html" class="nav-link">Guide</a></div><div class="nav-item"><a href="https://github.com/panter/vue-i18next/releases" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Release Notes
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <a href="https://github.com/panter/vue-i18next" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><a href="/vue-i18next/installation.html" class="sidebar-link">Installation</a></li><li><a href="/vue-i18next/introduction.html" class="sidebar-link">Introduction</a></li><li><div class="sidebar-group"><p class="sidebar-heading open"><span>Guide</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/vue-i18next/guide/started.html" class="sidebar-link">Getting started</a></li><li><a href="/vue-i18next/guide/component.html" class="active sidebar-link">Component based localization</a></li><li><a href="/vue-i18next/guide/component-interpolation.html" class="sidebar-link">Component interpolation</a></li><li><a href="/vue-i18next/guide/directive.html" class="sidebar-link">Directive</a></li><li><a href="/vue-i18next/guide/i18n-options.html" class="sidebar-link">i18nOptions</a></li><li><a href="/vue-i18next/guide/i18n.html" class="sidebar-link">i18n where are you?</a></li><li><a href="/vue-i18next/guide/single-file-component.html" class="sidebar-link">Single file components</a></li><li><a href="/vue-i18next/guide/miscellaneous.html" class="sidebar-link">Use Vue.Filter to deal with empty keys</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="component-based-localization"><a href="#component-based-localization" aria-hidden="true" class="header-anchor">#</a> Component based localization</h1> <p>In general, locale info (e.g. <code>locale</code>,<code>messages</code>, etc) is set in the <code>i18next</code> instance and passed to the <code>i18n</code> option as root Vue instance.</p> <p>Therefore you can globally translate with using <code>$t</code> in the root Vue instance and any composed component. You can also manage locale info for each component separately, which might be more convenient due to Vue components oriented design.</p> <p>Component based localization example:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">const</span> locales <span class="token operator">=</span> <span class="token punctuation">{</span>
+  en<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    hello<span class="token punctuation">:</span> <span class="token string">'Hello!'</span><span class="token punctuation">,</span>
+    loadbundle<span class="token punctuation">:</span> <span class="token string">'Load bundle language: {{lang}}'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+i18next<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  lng<span class="token punctuation">:</span> <span class="token string">'en'</span><span class="token punctuation">,</span>
+  resources<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    en<span class="token punctuation">:</span> <span class="token punctuation">{</span> translation<span class="token punctuation">:</span> locales<span class="token punctuation">.</span>en <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> i18n <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">VueI18next</span><span class="token punctuation">(</span>i18next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> Component1 <span class="token operator">=</span> <span class="token punctuation">{</span>
+  template<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;strong&gt;{{$t(&quot;loadbundle&quot;, {lang: this.lang}) }}&lt;/strong&gt;
+    &lt;/div&gt;`</span></span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      lang<span class="token punctuation">:</span> <span class="token string">'DE'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  i18n<span class="token punctuation">,</span>
+  components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    Component1
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+</code></pre></div><p>Template:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>app<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>{{ $t(&quot;message.hello&quot;) }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>component1</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>component1</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>Outputs the following:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>app<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Hello<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>container<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>Load bundle language: DE<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>As in the example above, if the component doesn't have the locale message, it falls back to globally defined localization info. The component uses the language set in the root instance (in the above example: <code>lng: 'en'</code>).</p></div> <div class="page-edit"><div class="edit-link"><a href="https://github.com/panter/vue-i18next/edit/master/docs/guide/component.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/vue-i18next/guide/started.html" class="prev">
+          Getting started
+        </a></span> <span class="next"><a href="/vue-i18next/guide/component-interpolation.html">
+          Component interpolation
+        </a>
+        →
+      </span></p></div> </div> <!----></div></div>
+    <script src="/vue-i18next/assets/js/6.10f9e706.js" defer></script><script src="/vue-i18next/assets/js/app.03fc2ba8.js" defer></script>
+  </body>
+</html>
