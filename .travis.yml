@@ -15,6 +15,6 @@ deploy:
   keep-history: true
   target-branch: gh-pages
   on:
-    branch: docs/gitbook
+    branch: master
 notifications:
   email: false
