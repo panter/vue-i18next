@@ -92,7 +92,7 @@
     "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0",
     "typescript": "^2.8.3",
-    "vue": "^2.4.0",
+    "vue": "^2.5.16",
     "vue-class-component": "^6.2.0",
     "vue-loader": "^10.0.0",
     "vue-template-compiler": "^2.1.0",

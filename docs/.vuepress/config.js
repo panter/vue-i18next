@@ -1,6 +1,7 @@
 const pkg = require('../../package.json');
 
 module.exports = {
+  base:'/vue-i18next/',
   title: pkg.name,
   description: pkg.description,
 

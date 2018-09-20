@@ -3,6 +3,18 @@ node_js:
   - "8"
 cache: yarn
 after_success:
-- ./deploy-docs.sh
-- npm run semantic-release
-- npm run coveralls
+  - npm run semantic-release
+  - npm run coveralls
+  - npm run docs:build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local_dir: docs/.vuepress/dist
+  github-token: $GH_TOKEN
+  repo: panter/vue-i18next
+  keep-history: true
+  target-branch: gh-pages
+  on:
+    branch: docs/gitbook
+notifications:
+  email: false
