@@ -21,11 +21,13 @@
 * vue >= **2.0.0**
 * i18next >= **6.0.1**
 
-## Usage
 
-Check the [DEMO](https://panter.github.io/vue-i18next/examples/) to see `vue-i18next` in action.
+## Documentation
 
-### Init
+See [here](http://panter.github.io/vue-i18next/)
+
+
+## Init
 
 ```javascript
 import Vue from 'vue';
@@ -47,11 +49,6 @@ new Vue({
   i18n: i18n,
 });
 ```
-
-## Documentation
-
-See [here](http://panter.github.io/vue-i18next/)
-
 
 ## Changelog
 
