@@ -15,10 +15,10 @@ export function install(_Vue) {
 
   const getByKey = (i18nOptions, i18nextOptions) => (key) => {
     if (
-      i18nOptions &&
-      i18nOptions.keyPrefix &&
-      !key.includes(i18nextOptions.nsSeparator)
-    ) {
+        i18nOptions &&
+        i18nOptions.keyPrefix &&
+        !key.includes(i18nextOptions.nsSeparator)
+      ) {
       return `${i18nOptions.keyPrefix}.${key}`;
     }
     return key;
@@ -39,38 +39,18 @@ export function install(_Vue) {
   };
 
   Vue.mixin({
-    computed: {
-      $t() {
-        const getKey = getByKey(
-          this._i18nOptions,
-          this.$i18n ? this.$i18n.i18next.options : {},
-        );
-
-        if (this._i18nOptions && this._i18nOptions.namespaces) {
-          const { lng, namespaces } = this._i18nOptions;
-
-          const fixedT = this.$i18n.i18next.getFixedT(lng, namespaces);
-          return (key, options) =>
-            fixedT(getKey(key), options, this.$i18n.i18nLoadedAt);
-        }
-
-        return (key, options) =>
-          this.$i18n.i18next.t(getKey(key), options, this.$i18n.i18nLoadedAt);
-      },
-    },
-
     beforeCreate() {
       const options = this.$options;
       if (options.i18n) {
-        this.$i18n = options.i18n;
+        this._i18n = options.i18n;
       } else if (options.parent && options.parent.$i18n) {
-        this.$i18n = options.parent.$i18n;
+        this._i18n = options.parent.$i18n;
       }
       let inlineTranslations = {};
 
-      if (this.$i18n) {
+      if (this._i18n) {
         const getNamespace =
-          this.$i18n.options.getComponentNamespace || getComponentNamespace;
+          this._i18n.options.getComponentNamespace || getComponentNamespace;
         const { namespace, loadNamespace } = getNamespace(this);
 
         if (options.__i18n) {
@@ -89,7 +69,7 @@ export function install(_Vue) {
             messages,
           } = this.$options.i18nOptions;
           let { namespaces } = this.$options.i18nOptions;
-          namespaces = namespaces || this.$i18n.i18next.options.defaultNS;
+          namespaces = namespaces || this._i18n.i18next.options.defaultNS;
 
           if (typeof namespaces === 'string') namespaces = [namespaces];
           const namespacesToLoad = namespaces.concat([namespace]);
@@ -99,7 +79,7 @@ export function install(_Vue) {
           }
 
           this._i18nOptions = { lng, namespaces: namespacesToLoad, keyPrefix };
-          this.$i18n.i18next.loadNamespaces(namespaces);
+          this._i18n.i18next.loadNamespaces(namespaces);
         } else if (options.parent && options.parent._i18nOptions) {
           this._i18nOptions = { ...options.parent._i18nOptions };
           this._i18nOptions.namespaces = [
@@ -110,13 +90,13 @@ export function install(_Vue) {
           this._i18nOptions = { namespaces: [namespace] };
         }
 
-        if (loadNamespace && this.$i18n.options.loadComponentNamespace) {
-          this.$i18n.i18next.loadNamespaces([namespace]);
+        if (loadNamespace && this._i18n.options.loadComponentNamespace) {
+          this._i18n.i18next.loadNamespaces([namespace]);
         }
 
         const languages = Object.keys(inlineTranslations);
         languages.forEach((lang) => {
-          this.$i18n.i18next.addResourceBundle(
+          this._i18n.i18next.addResourceBundle(
             lang,
             namespace,
             { ...inlineTranslations[lang] },
@@ -125,8 +105,33 @@ export function install(_Vue) {
           );
         });
       }
+
+      const getKey = getByKey(
+          this._i18nOptions,
+          this._i18n ? this._i18n.i18next.options : {},
+        );
+
+      if (this._i18nOptions && this._i18nOptions.namespaces) {
+        const { lng, namespaces } = this._i18nOptions;
+
+        const fixedT = this._i18n.i18next.getFixedT(lng, namespaces);
+        this._getI18nKey = (key, i18nextOptions) =>
+            fixedT(getKey(key), i18nextOptions, this._i18n.i18nLoadedAt);
+      } else {
+        this._getI18nKey = (key, i18nextOptions) =>
+          this._i18n.t(getKey(key), i18nextOptions, this._i18n.i18nLoadedAt);
+      }
     },
   });
+
+  // extend Vue.js
+  Object.defineProperty(Vue.prototype, '$i18n', {
+    get() { return this._i18n; },
+  });
+
+  Vue.prototype.$t = function t(key, options) {
+    return this._getI18nKey(key, options);
+  };
 
   Vue.component(component.name, component);
   Vue.directive('t', { bind, update });
