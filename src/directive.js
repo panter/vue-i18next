@@ -86,3 +86,8 @@ export function update(el, binding, vnode, oldVNode) {
 
   t(el, binding, vnode);
 }
+
+export default {
+  bind,
+  update,
+};
