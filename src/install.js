@@ -1,7 +1,8 @@
 /* eslint-disable import/no-mutable-exports */
 import deepmerge from 'deepmerge';
 import component from './component';
-import { bind, update } from './directive';
+import directive from './directive';
+import waitDirective from './wait';
 
 export let Vue;
 
@@ -134,5 +135,6 @@ export function install(_Vue) {
   };
 
   Vue.component(component.name, component);
-  Vue.directive('t', { bind, update });
+  Vue.directive('t', directive);
+  Vue.directive('waitForT', waitDirective);
 }

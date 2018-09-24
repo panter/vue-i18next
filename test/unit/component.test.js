@@ -311,6 +311,15 @@ describe('Components with backend', () => {
 
       expect(root.textContent).to.equal('dev__common__test');
     });
+
+    it('should wait for translation to be ready', async () => {
+      const root = vm.$refs.hello;
+      expect(root.textContent).to.equal('key1');
+      backend.flush();
+      await nextTick();
+
+      expect(root.textContent).to.equal('dev__common__test');
+    });
   });
 
   describe('Nested namespaces', () => {
