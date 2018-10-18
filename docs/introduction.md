@@ -13,5 +13,5 @@ vue-i18next is the vue support for i18next and provides:
 Let' play [Get Started](./guide/started.md)!
 
 :::warning Notice
-:warning: This documentation is for `vue-i18next` v0.0.12 or later.
+:warning: This documentation is for `vue-i18next` v0.12.0 or later.
 :::
