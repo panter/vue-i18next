@@ -1,5 +1,5 @@
-import i18next from 'i18next';
-import Vue, { PluginFunction } from 'vue';
+import i18next from "i18next";
+import Vue, { PluginFunction } from "vue";
 
 declare class VueI18Next {
   constructor(i18next: i18next.i18n, options?: VueI18NextOptions);
@@ -26,14 +26,14 @@ export interface VueI18NextComponentOptions {
   messages?: { [x: string]: {} };
 }
 
-declare module 'vue/types/options' {
+declare module "vue/types/options" {
   interface ComponentOptions<V extends Vue> {
     i18n?: VueI18Next;
     i18nOptions?: VueI18NextComponentOptions;
   }
 }
 
-declare module 'vue/types/vue' {
+declare module "vue/types/vue" {
   interface Vue {
     readonly $i18n: VueI18Next;
     $t: i18next.TranslationFunction;
