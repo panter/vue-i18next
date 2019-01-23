@@ -14,7 +14,7 @@
 * Component based localization
 * Component interpolation
 * Lazy load namespaces
-* Namespaced translation for compoents
+* Namespaced translation for components
 
 ### Requirements
 
