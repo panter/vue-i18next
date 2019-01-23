@@ -3,24 +3,16 @@
 by [@kazupon](https://github.com/kazupon)
 
 ```html
-<i18n>
-  {
-    "en": {
-      "hello": "hello world!"
-    }
-  }
-</i18n>
+<i18n> { "en": { "hello": "hello world!" } } </i18n>
 
 <template>
-  <div id="app">
-    <p>message: {{ $t('hello') }}</p>
-  </div>
+  <div id="app"><p>message: {{ $t('hello') }}</p></div>
 </template>
 
 <script>
   export default {
-    name: 'app',
-  }
+    name: "app"
+  };
 </script>
 ```
 
@@ -32,7 +24,10 @@ To be able to use the `<i18>` you need to use the vue-loader:
 npm install @kazupon/vue-i18n-loader --save-dev
 ```
 
+For a detailed documentation check the original [docs here](https://github.com/kazupon/vue-i18n-loader).
+
 ```
+// vue-loader (~v14.x):
 module.exports = {
   // ...
   module: {
@@ -61,12 +56,7 @@ npm install yaml-loader --save-dev
 ```
 
 ```html
-<i18n>
-
-en:
-  hello: "hello world!"
-
-</i18n>
+<i18n> en: hello: "hello world!" </i18n>
 ```
 
 ```javascript
