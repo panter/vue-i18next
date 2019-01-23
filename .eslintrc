@@ -5,18 +5,16 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
-      "globalReturn": true,
+      "globalReturn": true
     }
   },
-   "globals": {
+  "globals": {
     "document": true,
     "window": true,
     "__VERSION__": true
   },
   "plugins": [],
-  "extends": [
-    "airbnb",
-  ],
+  "extends": ["airbnb"],
   "rules": {
     "arrow-body-style": [1, "as-needed"],
     "no-underscore-dangle": 0,

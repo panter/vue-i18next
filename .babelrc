@@ -1,12 +1,13 @@
 {
-  "presets": [
-    ["es2015"],
+  "presets": [["@babel/env", { "modules": "commonjs" }]],
+  "plugins": [
+    "add-module-exports",
+    "@babel/plugin-proposal-object-rest-spread"
   ],
-  "plugins": ["babel-plugin-add-module-exports", "transform-object-rest-spread"],
   "env": {
     "test": {
-      "presets": ["es2015", "es2017"],
-      "plugins": ["transform-object-rest-spread", "istanbul"]
+      "presets": ["@babel/env"],
+      "plugins": ["@babel/plugin-proposal-object-rest-spread", "istanbul"]
     }
   }
 }
