@@ -34,3 +34,11 @@ new Vue({
   i18n: i18n,
 });
 ```
+
+## Init options
+
+| Name                       | Description                                                                                                                                                                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **loadComponentNamespace** | When using the [namespace options](/guide/i18n-options.md#namespaces) the namespaces will be loaded with [loadNamespaces](https://www.i18next.com/overview/api#loadnamespaces),<br>so one can lazy load namespaces for components. |
+| **bindI18n**               | Listen for `i18next` events and refreshes the component.<br>Check the [i18next documentation for more infos](https://www.i18next.com/overview/api#events)                                                                          |
+| **bindStore**              | Listen for `i18next` store events and refreshes the component.<br>Check the [i18next store documentation for more infos](https://www.i18next.com/overview/api#store-events)                                                        |
