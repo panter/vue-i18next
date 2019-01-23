@@ -11,21 +11,19 @@
 
 **vue-i18next** is the vue support for i18next and provides:
 
-* Component based localization
-* Component interpolation
-* Lazy load namespaces
-* Namespaced translation for components
+- Component based localization
+- Component interpolation
+- Lazy load namespaces
+- Namespaced translation for components
 
 ### Requirements
 
-* vue >= **2.0.0**
-* i18next >= **6.0.1**
-
+- vue >= **2.0.0**
+- i18next >= **6.0.1**
 
 ## Documentation
 
 See [here](http://panter.github.io/vue-i18next/)
-
 
 ## Init
 
@@ -54,16 +52,13 @@ new Vue({
 
 Detailed changes for each release are documented in the [releases](https://github.com/panter/vue-i18next/releases).
 
-
 ## Issues
 
-Please make sure to read the [Issue Reporting Checklist](https://github.com/@panter/vue-i18next/master/CONTRIBUTING.md##using-the-issue-tracker) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
-
+Please make sure to read the [Issue Reporting Checklist](https://github.com/panter/vue-i18next/blob/master/CONTRIBUTING.md##using-the-issue-tracker) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
 ## Contribution
 
-Please make sure to read the [Contributing Guide](https://github.com/@panter/vue-i18next/master/CONTRIBUTING.md) before making a pull request.
-
+Please make sure to read the [Contributing Guide](https://github.com/panter/vue-i18next/blob/master/CONTRIBUTING.md) before making a pull request.
 
 ## License
 
