@@ -1,9 +1,8 @@
 # i18nOptions
 
-
 ## namespaces
 
-The namespace will be loaded with (loadNamespaces)[http://i18next.com/docs/api/#load-namespaces],so one can lazy load namespaces for components.
+The namepace will not be loaded automatically, see [loadComponentNamespace](/guide/started.html#init)
 
 ```javascript
 const locales = {
@@ -51,7 +50,6 @@ const app = {
   }
 };
 
-
 i18next.init({
   lng: "en",
   fallbackLng: "en",
@@ -63,7 +61,7 @@ i18next.init({
 const i18n = new VueI18next(i18next);
 
 Vue.component("app", {
-  i18nOptions: { namespaces: ["app","common"] },
+  i18nOptions: { namespaces: ["app", "common"] },
   template: `<strong>{{ $t("promise") }}</strong>`
 });
 ```
@@ -97,6 +95,7 @@ Vue.component('app', {
 ```
 
 ## messages
+
 Translations can not only be defined in translation files but also in the `i18nOptions`.
 
 ```javascript
@@ -142,4 +141,3 @@ Vue.component('app', {
     </div>`,
 });
 ```
-
