@@ -1,5 +1,5 @@
 {
-  "presets": [["@babel/env", { "modules": "commonjs" }]],
+  "presets": [["@babel/env"]],
   "plugins": [
     "add-module-exports",
     "@babel/plugin-proposal-object-rest-spread"

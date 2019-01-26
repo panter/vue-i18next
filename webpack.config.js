@@ -1,17 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const config = require('./package.json');
 
 module.exports = {
+  mode: 'development',
   entry: './src/i18n.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'vue-i18next.js',
-    library: ['VueI18next'],
-    libraryTarget: 'umd',
-    umdNamedDefine: true,
   },
   module: {
     rules: [
@@ -46,22 +42,3 @@ module.exports = {
   },
   devtool: '#eval-source-map',
 };
-
-// if (process.env.NODE_ENV === 'production') {
-module.exports.optimization = {
-  minimizer: [new UglifyJsPlugin({ sourceMap: true })],
-};
-
-module.exports.devtool = '#source-map';
-// http://vue-loader.vuejs.org/en/workflow/production.html
-module.exports.plugins = (module.exports.plugins || []).concat([
-  new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: '"production"',
-    },
-  }),
-  // new webpack.LoaderOptionsPlugin({
-  //   minimize: true,
-  // }),
-]);
-// }
