@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-i18next started example</title>
+    <script src="https://unpkg.com/vue@2.2.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/i18next@8.0.0/i18next.js"></script>
+    <script src="../../dist/vue-i18next.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ $t("message.hello") }}</p>
+    </div>
+    <script>
+      var messages = {
+        en: {
+          message: {
+            hello: "hello you"
+          }
+        },
+        de: {
+          message: {
+            hello: "hallo du"
+          }
+        }
+      };
+
+      i18next.init({
+        lng: "de",
+        fallbackLng: "en",
+        resources: {
+          en: { translation: messages.en },
+          de: { translation: messages.de }
+        }
+      });
+
+      const i18n = new VueI18next(i18next);
+      new Vue({ i18n: i18n }).$mount("#app");
+    </script>
+  </body>
+</html>
