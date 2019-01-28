@@ -1,11 +1,10 @@
 import BackendMock from '../helpers/backendMock';
-import { bind, update } from '../../src/wait';
+import { bind, update } from '../../src/directives/wait';
 import sinon from 'sinon';
 
 const backend = new BackendMock();
 
 class I18nextMock {
-
   constructor() {
     this.events = { on: [], off: [] };
     this.isInitialized = undefined;
@@ -20,9 +19,7 @@ class I18nextMock {
   }
 
   mockFireEvent(e) {
-    this.events.on
-      .filter(({ event }) => e === event)
-      .map(({ options }) => options());
+    this.events.on.filter(({ event }) => e === event).map(({ options }) => options());
   }
 }
 
@@ -59,7 +56,7 @@ describe('wait directive', () => {
       const vm = new Vue({
         i18n: vueI18Next,
         render(h) {
-        // <p ref="text" v-waitForT></p>
+          // <p ref="text" v-waitForT></p>
           return h('p', {
             ref: 'text',
             directives: [
@@ -183,7 +180,7 @@ describe('wait directive', () => {
       const vm = new Vue({
         i18n: vueI18Next,
         render(h) {
-        // <p ref="text" v-waitForT></p>
+          // <p ref="text" v-waitForT></p>
           return h('p', {
             ref: 'text',
             directives: [

@@ -225,7 +225,7 @@ describe('loads namespaces', () => {
 
     const vueI18Next = new VueI18Next(i18next, {
       loadComponentNamespace: true,
-      getComponentNamespace: () => ({ namespace: 'comp-ns', loadNamespace: true }),
+      componentNamespace: 'comp-ns',
     });
     i18next.init({
       lng: 'en',

@@ -98,11 +98,9 @@ describe('directive', () => {
                 rawName: 'v-t',
                 value: {
                   path: 'helloPerson',
-                  language: 'de',
-                  args: { name: this.name },
+                  args: { name: this.name, lng: 'de' },
                 },
-                expression:
-                  "{ path: 'helloPerson', language: 'de', args: { name: this.name } }",
+                expression: "{ path: 'helloPerson', args: { name: this.name, lng: 'de' } }",
               },
             ],
           });
@@ -122,7 +120,7 @@ describe('directive', () => {
           tkey: 'helloPerson',
         },
         render(h) {
-          // <p ref="text" v-t="{ path: msgPath, language: 'de', args: { name: 'Hans' } }"></p>
+          // <p ref="text" v-t="{ path: msgPath, args: { name: 'Hans', lng: 'de' } }"></p>
           return h('p', {
             ref: 'text',
             directives: [
@@ -131,11 +129,9 @@ describe('directive', () => {
                 rawName: 'v-t',
                 value: {
                   path: this.tkey,
-                  language: 'de',
-                  args: { name: 'Hans' },
+                  args: { name: 'Hans', lng: 'de' },
                 },
-                expression:
-                  "{ path: tkey, language: 'de', args: { name: 'Hans' } }",
+                expression: "{ path: tkey, language: 'de', args: { name: 'Hans' } }",
               },
             ],
           });
@@ -165,8 +161,7 @@ describe('directive', () => {
                   path: this.tkey,
                   args: { name: 'Hans' },
                 },
-                expression:
-                  "{ path: tkey, args: { name: 'Hans' } }",
+                expression: "{ path: tkey, args: { name: 'Hans' } }",
               },
             ],
           });
