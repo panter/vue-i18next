@@ -21,7 +21,6 @@
   "scripts": {
     "roll": "rollup",
     "prepublish": "npm run build",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
     "lint": "eslint src/**.js",
     "test": "npm run lint && npm run test:unit && npm run test:types",
