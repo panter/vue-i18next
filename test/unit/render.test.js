@@ -177,7 +177,7 @@ describe('loads namespaces', () => {
     const el = document.createElement('div');
     new Vue({
       i18n: vueI18Next,
-      i18nOptions: { namespace: 'namespace1' },
+      i18nOptions: { ns: 'namespace1' },
       components: {
         child1: {
           render(h) {
@@ -194,38 +194,37 @@ describe('loads namespaces', () => {
     expect(loadNamespaces).to.have.been.calledOnce;
   });
 
-  it('should load component namespaces if loadComponentNamespace = true', async () => {
-    const loadNamespaces = sandbox.stub(i18next, 'loadNamespaces');
+  // it('should load component namespaces if loadComponentNamespace = true', async () => {
+  //   const loadNamespaces = sandbox.stub(i18next, 'loadNamespaces');
 
-    const vueI18Next = new VueI18Next(i18next, { loadComponentNamespace: true });
-    i18next.init({
-      lng: 'en',
-    });
-    const el = document.createElement('div');
-    new Vue({
-      i18n: vueI18Next,
-      components: {
-        child1: {
-          render(h) {
-            return h('div', { ref: ' div' }, [h('p', { ref: 'text' }, [this.$t('goodbye')])]);
-          },
-        },
-      },
-      render(h) {
-        return h('child1', { ref: 'child1' });
-      },
-    }).$mount(el);
+  //   const vueI18Next = new VueI18Next(i18next, { loadComponentNamespace: true });
+  //   i18next.init({
+  //     lng: 'en',
+  //   });
+  //   const el = document.createElement('div');
+  //   new Vue({
+  //     i18n: vueI18Next,
+  //     components: {
+  //       child1: {
+  //         render(h) {
+  //           return h('div', { ref: ' div' }, [h('p', { ref: 'text' }, [this.$t('goodbye')])]);
+  //         },
+  //       },
+  //     },
+  //     render(h) {
+  //       return h('child1', { ref: 'child1' });
+  //     },
+  //   }).$mount(el);
 
-    await nextTick();
-    expect(loadNamespaces).to.have.been.calledOnce;
-  });
+  //   await nextTick();
+  //   expect(loadNamespaces).to.have.been.calledOnce;
+  // });
 
   it('should use the getComponentNamespace to load the namespace', async () => {
     const loadNamespaces = sandbox.stub(i18next, 'loadNamespaces');
 
     const vueI18Next = new VueI18Next(i18next, {
       loadComponentNamespace: true,
-      componentNamespace: 'comp-ns',
     });
     i18next.init({
       lng: 'en',
@@ -235,6 +234,7 @@ describe('loads namespaces', () => {
       i18n: vueI18Next,
       components: {
         child1: {
+          i18nOptions: { ns: 'comp-ns' },
           render(h) {
             return h('div', { ref: ' div' }, [h('p', { ref: 'text' }, [this.$t('goodbye')])]);
           },
@@ -247,6 +247,35 @@ describe('loads namespaces', () => {
 
     await nextTick();
     expect(loadNamespaces).to.have.been.calledWith(['comp-ns']);
+  });
+
+  it('should use the getComponentNamespace as a function to load the namespace', async () => {
+    const loadNamespaces = sandbox.stub(i18next, 'loadNamespaces');
+
+    const vueI18Next = new VueI18Next(i18next, {
+      loadComponentNamespace: true,
+    });
+    i18next.init({
+      lng: 'en',
+    });
+    const el = document.createElement('div');
+    new Vue({
+      i18n: vueI18Next,
+      components: {
+        child1: {
+          i18nOptions: { ns: () => ['comp-ns1'] },
+          render(h) {
+            return h('div', { ref: ' div' }, [h('p', { ref: 'text' }, [this.$t('goodbye')])]);
+          },
+        },
+      },
+      render(h) {
+        return h('child1', { ref: 'child1' });
+      },
+    }).$mount(el);
+
+    await nextTick();
+    expect(loadNamespaces).to.have.been.calledWith(['comp-ns1']);
   });
 
   it('should not load namespace if global loadComponentNamespace is false', async () => {

@@ -1,6 +1,6 @@
+import sinon from 'sinon';
 import BackendMock from '../../helpers/backendMock';
 import { bind, update } from '../../../src/directives/wait';
-import sinon from 'sinon';
 
 const backend = new BackendMock();
 
