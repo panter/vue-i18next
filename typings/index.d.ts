@@ -16,11 +16,10 @@ declare class VueI18Next {
 export interface VueI18NextOptions extends i18next.TranslationOptions {
   bindI18n?: string;
   bindStore?: string;
-  loadComponentNamespace?: boolean;
 }
 
 export interface VueI18NextComponentOptions {
-  namespaces?: string | Array<string>;
+  ns?: string | Array<string>;
   lng?: string;
   keyPrefix?: string;
   messages?: { [x: string]: {} };
