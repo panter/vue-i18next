@@ -22,6 +22,7 @@
     "roll": "rollup",
     "prepublish": "npm run build",
     "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
+    "build:watch": "watch 'npm run build' ./src",
     "lint": "eslint src/**.js",
     "test": "npm run lint && npm run test:unit && npm run test:types",
     "test:unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js",
@@ -109,6 +110,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
-    "deepmerge": "^2.0.0"
+    "deepmerge": "^2.0.0",
+    "watch": "^1.0.2"
   }
 }
