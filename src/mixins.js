@@ -8,35 +8,68 @@ const getByKey = (i18nextOptions, keyPrefix) => (key) => {
   return key;
 };
 
-const getComponentNamespace = (vmOptions, i18nOptions, defaultNS, props) => {
+const getNamespaces = (vmOptions, defaultNS) => {
   const ns = vmOptions.i18nOptions ? vmOptions.i18nOptions.ns : null;
-  let componentNamespaces = isFunction(ns)
-    ? ns(props, vmOptions)
-    : ns || defaultNS;
+  const componentNamespaces = isFunction(ns) ? ns(vmOptions) : ns || defaultNS;
 
-  if (typeof componentNamespaces === 'string') { componentNamespaces = [componentNamespaces]; }
-
-  const componentNamespace = generateId();
-  return {
-    componentNamespaces,
-    componentNamespace,
-  };
+  return typeof componentNamespaces === 'string' ? [componentNamespaces] : componentNamespaces;
 };
 
-const getInlineTranslations = (options) => {
+const loadInlineTranslations = (options, componentNamespace, i18next) => {
   let translations = {};
   if (options.__i18n) {
-    translations = options.__i18n.reduce(
-      (a, r) => deepmerge(a, JSON.parse(r)),
-      {},
-    );
+    translations = options.__i18n.reduce((a, r) => deepmerge(a, JSON.parse(r)), {});
   }
 
   if (options.i18nOptions && options.i18nOptions.messages) {
     translations = deepmerge(translations, options.i18nOptions.messages);
   }
 
-  return translations;
+  const keys = Object.keys(translations);
+  keys.forEach((lang) => {
+    i18next.addResourceBundle(lang, componentNamespace, { ...translations[lang] }, true, false);
+  });
+
+  return keys.length > 0;
+};
+
+const geti18nOptions = (options, componentNamespace, namespaces) => {
+  if (options.i18nOptions) {
+    // Use i18nOptions if provided
+    const { lng = null } = options.i18nOptions;
+    return {
+      componentNamespace,
+      lng,
+      namespaces: [...namespaces, componentNamespace],
+    };
+  } else if (options.parent && options.parent._i18nOptions) {
+    // Use parent i18nOptions if there are any
+    return {
+      ...options.parent._i18nOptions,
+      namespaces: [componentNamespace, ...options.parent._i18nOptions.namespaces],
+      componentNamespace,
+    };
+  }
+  return { componentNamespace, namespaces: [...namespaces, componentNamespace] };
+};
+
+const loadNamespaces = (namespaces, i18next, cb) => {
+  const initialized = () => {
+    cb();
+
+    // due to emitter removing issue in i18next we need to delay remove
+    setTimeout(() => {
+      i18next.off('initialized', initialized);
+    }, 1000);
+  };
+
+  i18next.loadNamespaces(namespaces, () => {
+    if (!i18next.isInitialized) {
+      i18next.on('initialized', initialized);
+    } else {
+      cb();
+    }
+  });
 };
 
 export function beforeCreate() {
@@ -48,102 +81,41 @@ export function beforeCreate() {
   }
 
   if (this._i18n) {
-    const {
-      componentNamespace,
-      componentNamespaces: cns,
-    } = getComponentNamespace(
-      options,
-      this._i18n.options,
-      this._i18n.i18next.options.defaultNS,
-      this.$props,
-    );
+    const i18next = this._i18n.i18next;
+    const componentNamespace = generateId();
+    const namespaces = getNamespaces(options, i18next.options.defaultNS);
 
     const language =
       options.i18nOptions && options.i18nOptions.lng
         ? options.i18nOptions.lng
-        : this._i18n.i18next.languages && this._i18n.i18next.languages[0];
+        : i18next.languages && i18next.languages[0];
+
     this.i18nReady =
-      !cns ||
-      (!!language &&
-        cns.every(ns => this._i18n.i18next.hasResourceBundle(language, ns)));
+      !namespaces ||
+      (!!language && namespaces.every(ns => i18next.hasResourceBundle(language, ns)));
 
-    const initialized = () => {
-      this.i18nReady = true;
-
-      // due to emitter removing issue in i18next we need to delay remove
-      setTimeout(() => {
-        this._i18n.i18next.off('initialized', initialized);
-      }, 1000);
-    };
-
-    if (cns) {
-      this._i18n.i18next.loadNamespaces(cns, () => {
-        if (!this._i18n.i18next.isInitialized) {
-          this._i18n.i18next.on('initialized', initialized);
-        } else {
-          this.i18nReady = true;
-        }
+    if (namespaces && (options.i18nOptions || !options.parent)) {
+      loadNamespaces(namespaces, i18next, () => {
+        this.i18nReady = true;
       });
-    } else if (!this._i18n.i18next.isInitialized) {
-      this._i18n.i18next.on('initialized', initialized);
+
+      loadInlineTranslations(options, componentNamespace, i18next);
     }
 
-    const namespaces = [...cns, componentNamespace];
-    const inlineTranslations = getInlineTranslations(options);
-
-    // load inline translation into i18next
-    Object.keys(inlineTranslations).forEach((lang) => {
-      this._i18n.i18next.addResourceBundle(
-        lang,
-        componentNamespace,
-        { ...inlineTranslations[lang] },
-        true,
-        false,
-      );
-    });
-
-    if (options.i18nOptions) {
-      // Use i18nOptions if provided
-      const { lng = null } = options.i18nOptions;
-
-      this._i18nOptions = {
-        lng,
-        namespaces,
-      };
-    } else if (options.parent && options.parent._i18nOptions) {
-      // Use parent i18nOptions if there are any
-      this._i18nOptions = {
-        ...options.parent._i18nOptions,
-        namespaces: [
-          componentNamespace,
-          ...options.parent._i18nOptions.namespaces,
-        ],
-      };
-    } else if (Object.keys(inlineTranslations).length > 0) {
-      // if no options are provided but there are inline translations construct the namespace
-      // with the componentNamespace
-      this._i18nOptions = { namespaces };
-    }
-
-    if (!this._i18nOptions) {
-      this._i18nOptions = { componentNamespace, namespaces };
-    } else {
-      this._i18nOptions.componentNamespace = componentNamespace;
-    }
+    this._i18nOptions = geti18nOptions(options, componentNamespace, namespaces);
   }
 
   // use getFixedT from i18next if options provide namespaces
   if (this._i18nOptions) {
     const { lng = null, namespaces = null } = this._i18nOptions;
-
+    // console.log('options', namespaces);
     const getKey = getByKey(
       this._i18n ? this._i18n.i18next.options : {},
       options.i18nOptions && options.i18nOptions.keyPrefix,
     );
 
     const fixedT = this._i18n.i18next.getFixedT(lng, namespaces);
-    this._t = (key, i18nextOptions) =>
-      fixedT(getKey(key), i18nextOptions, this._i18n.i18nLoadedAt);
+    this._t = (key, i18nextOptions) => fixedT(getKey(key), i18nextOptions, this._i18n.i18nLoadedAt);
   }
 }
 

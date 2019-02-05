@@ -277,32 +277,4 @@ describe('loads namespaces', () => {
     await nextTick();
     expect(loadNamespaces).to.have.been.calledWith(['comp-ns1']);
   });
-
-  it('should not load namespace if global loadComponentNamespace is false', async () => {
-    const loadNamespaces = sandbox.stub(i18next, 'loadNamespaces');
-
-    const vueI18Next = new VueI18Next(i18next, {
-      getComponentNamespace: () => ({ namespace: 'comp-ns', loadNamespace: true }),
-    });
-    i18next.init({
-      lng: 'en',
-    });
-    const el = document.createElement('div');
-    new Vue({
-      i18n: vueI18Next,
-      components: {
-        child1: {
-          render(h) {
-            return h('div', { ref: ' div' }, [h('p', { ref: 'text' }, [this.$t('goodbye')])]);
-          },
-        },
-      },
-      render(h) {
-        return h('child1', { ref: 'child1' });
-      },
-    }).$mount(el);
-
-    await nextTick();
-    expect(loadNamespaces).to.have.been.not.called;
-  });
 });

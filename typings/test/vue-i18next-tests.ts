@@ -1,8 +1,8 @@
-import Vue, { ComponentOptions } from "vue";
-import * as i18next from "i18next";
-import VueI18Next from "../index";
-import { TranslationFunction } from "i18next";
-import Component from "vue-class-component";
+import Vue, { ComponentOptions } from 'vue';
+import * as i18next from 'i18next';
+import VueI18Next from '../index';
+import { TranslationFunction } from 'i18next';
+import Component from 'vue-class-component';
 
 /**
  * VueI18n.install
@@ -13,14 +13,14 @@ VueI18Next.install(Vue);
 VueI18Next.version; // $ExpectType string
 
 i18next.init({
-  lng: "de",
-  resources: {}
+  lng: 'de',
+  resources: {},
 });
 const i18n = new VueI18Next(i18next);
 const i18nWithOptions = new VueI18Next(i18next, {});
 
 const vm = new Vue({
-  i18n
+  i18n,
 });
 
 vm.$i18n; // $ExpectType VueI18Next
@@ -28,7 +28,7 @@ vm.$i18n.i18next; // $ExpectType i18next
 vm.$t; // $ExpectType TranslationFunction
 
 @Component({
-  template: "<div><a v-on:click=\"changeLanguage('de')\">DE</a></div>"
+  template: '<div><a v-on:click="changeLanguage(\'de\')">DE</a></div>',
 })
 class LanguageChangerComponent extends Vue {
   changeLanguage(lang: string): void {
@@ -36,8 +36,8 @@ class LanguageChangerComponent extends Vue {
   }
 }
 
-new LanguageChangerComponent().changeLanguage("de");
+new LanguageChangerComponent().changeLanguage('de');
 
-Vue.component("app", {
-  i18nOptions: { namespaces: "common" }
+Vue.component('app', {
+  i18nOptions: { ns: 'common' },
 });

@@ -26,11 +26,11 @@
     "lint": "eslint src/**.js",
     "test": "npm run lint && npm run test:unit && npm run test:types",
     "test:unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js",
+    "test:types": "tsc -p typings",
     "gh-pages": "npm run build && rimraf ./gh-pages && mkdirp ./gh-pages/examples mkdirp ./gh-pages/dist && ncp ./examples ./gh-pages/examples && ncp ./dist ./gh-pages/dist",
     "gh-pages-publish": "gh-pages -d gh-pages",
     "semantic-release": "semantic-release",
     "coveralls": "cat ./test/coverage/lcov.info | coveralls",
-    "test:types": "tsc -p typings",
     "docs:dev": "vuepress dev docs --temp .temp",
     "docs:build": "vuepress build docs --temp .temp"
   },
