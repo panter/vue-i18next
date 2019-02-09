@@ -72,7 +72,7 @@ const loadNamespaces = (namespaces, i18next, cb) => {
   });
 };
 
-export function beforeCreate() {
+function beforeCreate() {
   const options = this.$options;
   if (options.i18n) {
     this._i18n = options.i18n;
@@ -90,25 +90,16 @@ export function beforeCreate() {
         ? options.i18nOptions.lng
         : i18next.languages && i18next.languages[0];
 
-    this.i18nReady =
-      !namespaces ||
-      (!!language && namespaces.every(ns => i18next.hasResourceBundle(language, ns)));
-
-    if (namespaces && (options.i18nOptions || !options.parent)) {
-      loadNamespaces(namespaces, i18next, () => {
-        this.i18nReady = true;
-      });
-
-      loadInlineTranslations(options, componentNamespace, i18next);
-    }
+    loadInlineTranslations(options, componentNamespace, i18next);
 
     this._i18nOptions = geti18nOptions(options, componentNamespace, namespaces);
+    this._i18nOptions.defaultLanguage = language;
+    this._i18nOptions.defaultNamespaces = namespaces;
   }
 
   // use getFixedT from i18next if options provide namespaces
   if (this._i18nOptions) {
     const { lng = null, namespaces = null } = this._i18nOptions;
-    // console.log('options', namespaces);
     const getKey = getByKey(
       this._i18n ? this._i18n.i18next.options : {},
       options.i18nOptions && options.i18nOptions.keyPrefix,
@@ -119,8 +110,31 @@ export function beforeCreate() {
   }
 }
 
+function created() {
+  if (this._i18nOptions) {
+    const options = this.$options;
+    const i18next = this._i18n.i18next;
+    const namespaces = this._i18nOptions.defaultNamespaces;
+    const language = this._i18nOptions.defaultLanguage;
+
+    this.$data.$i18nReady =
+      !namespaces ||
+      (!!language && namespaces.every(ns => i18next.hasResourceBundle(language, ns)));
+
+    if (namespaces && (options.i18nOptions || !options.parent)) {
+      loadNamespaces(namespaces, i18next, () => {
+        this.$data.$i18nReady = true;
+      });
+    }
+
+    Object.defineProperty(this, '$i18nReady', {
+      get: () => this.$data.$i18nReady,
+    });
+  }
+}
+
 const data = function data() {
-  return { i18nReady: true };
+  return { $i18nReady: false };
 };
 
-export default { beforeCreate, data };
+export default { beforeCreate, created, data };
