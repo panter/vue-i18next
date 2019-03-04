@@ -40,7 +40,7 @@
   "unpkg": "./dist/vue-i18next.js",
   "types": "typings/index.d.ts",
   "peerDependencies": {
-    "i18next": ">= 6.0.1",
+    "i18next": ">= 14.0.0",
     "vue": ">=2.0.0"
   },
   "devDependencies": {
@@ -49,7 +49,6 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-stage-2": "^7.0.0",
-    "@types/i18next": "^8.4.3",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-add-module-exports": "^1.0.0",
@@ -66,7 +65,7 @@
     "eslint-plugin-react": "^6.8.0",
     "file-loader": "^0.9.0",
     "gh-pages": "^1.0.0",
-    "i18next": "^6.0.1",
+    "i18next": "14.0.0",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "karma": "^1.4.1",

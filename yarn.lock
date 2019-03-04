@@ -1310,10 +1310,6 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
-"@types/i18next@^8.4.3":
-  version "8.4.3"
-  resolved "https://registry.yarnpkg.com/@types/i18next/-/i18next-8.4.3.tgz#9136a9551bf5bf7169aa9f3125c1743f1f8dd6de"
-
 "@types/node@*":
   version "10.12.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
@@ -5665,9 +5661,10 @@ https-proxy-agent@^1.0.0, https-proxy-agent@~1.0.0:
     debug "2"
     extend "3"
 
-i18next@^6.0.1:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-6.1.2.tgz#8d09e2b77e59099db54f1cffd03a80b3e428c85a"
+i18next@14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-14.0.0.tgz#8f0be07c0de9db09081ed7d98e8f04112c8c15c9"
+  integrity sha512-5ObcZNF0ksbBrgfeo4bMBcg0x/8O7kN/0vUBgmpB5WP8vcy0js4EQOMa/8nMyKrY7j3/NT491P+lraHl98TpvQ==
 
 iconv-lite@0.4.15:
   version "0.4.15"
