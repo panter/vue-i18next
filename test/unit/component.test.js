@@ -281,10 +281,10 @@ describe('Component inline translation', () => {
 
 describe('Components with backend', () => {
   describe('namespace on top component', () => {
-    const i18next1 = i18next.createInstance();
     let vueI18Next;
     let vm;
     beforeEach((done) => {
+      const i18next1 = i18next.createInstance();
       i18next1.use(backend).init({
         lng: 'en',
       });
