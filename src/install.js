@@ -126,11 +126,13 @@ export function install(_Vue) {
   });
 
   // extend Vue.js
-  Object.defineProperty(Vue.prototype, '$i18n', {
-    get() {
-      return this._i18n;
-    }
-  });
+  if (!Object.prototype.hasOwnProperty.call(Vue.prototype, '$i18n')) {
+    Object.defineProperty(Vue.prototype, '$i18n', {
+      get() {
+        return this._i18n;
+      }
+    });
+  }
 
   Vue.prototype.$t = function t(key, options) {
     return this._getI18nKey(key, options);
