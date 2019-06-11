@@ -83,7 +83,7 @@ function beforeCreate() {
   if (this._i18n) {
     const i18next = this._i18n.i18next;
     const componentNamespace = generateId();
-    const namespaces = getNamespaces(options, i18next.options.defaultNS);
+    const componentNamespaces = getNamespaces(options, i18next.options.defaultNS);
 
     const language =
       options.i18nOptions && options.i18nOptions.lng
@@ -92,16 +92,13 @@ function beforeCreate() {
 
     loadInlineTranslations(options, componentNamespace, i18next);
 
-    this._i18nOptions = geti18nOptions(options, componentNamespace, namespaces);
+    this._i18nOptions = geti18nOptions(options, componentNamespace, componentNamespaces);
     this._i18nOptions.defaultLanguage = language;
-    this._i18nOptions.defaultNamespaces = namespaces;
-  }
+    this._i18nOptions.defaultNamespaces = componentNamespaces;
 
-  // use getFixedT from i18next if options provide namespaces
-  if (this._i18nOptions) {
     const { lng = null, namespaces = null } = this._i18nOptions;
     const getKey = getByKey(
-      this._i18n ? this._i18n.i18next.options : {},
+      this._i18n.i18next.options,
       options.i18nOptions && options.i18nOptions.keyPrefix,
     );
 
