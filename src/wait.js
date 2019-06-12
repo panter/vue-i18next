@@ -47,5 +47,5 @@ export function update(el, binding, vnode, oldVNode) {
 
 export default {
   bind,
-  update,
+  update
 };

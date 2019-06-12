@@ -6,7 +6,7 @@ export default class VueI18n {
       bindI18n: 'languageChanged loaded',
       bindStore: 'added removed',
       loadComponentNamespace: false,
-      ...opts,
+      ...opts
     };
 
     this._vm = null;
@@ -27,7 +27,7 @@ export default class VueI18n {
 
   resetVM(data) {
     const oldVM = this._vm;
-    const silent = Vue.config.silent;
+    const { silent } = Vue.config;
     Vue.config.silent = true;
     this._vm = new Vue({ data });
     Vue.config.silent = silent;
@@ -39,6 +39,7 @@ export default class VueI18n {
   get i18nLoadedAt() {
     return this._vm.$data.i18nLoadedAt;
   }
+
   set i18nLoadedAt(date) {
     this._vm.$set(this._vm, 'i18nLoadedAt', date);
   }
