@@ -10,5 +10,5 @@ features:
     details: In addition to simple translation, support localization such as pluralization, number, datetime ... etc
   - title: Component-oriented
     details: You can manage locale messages on single file component
-footer: MIT Licensed | Copyright © 2019 panter ag
+footer: MIT Licensed | Copyright © 2019-present panter ag
 ---
