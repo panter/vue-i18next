@@ -5,3 +5,4 @@ lib/
 gh-pages/
 npm-debug.log
 test/coverage
+.temp/

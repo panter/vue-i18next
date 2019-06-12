@@ -1,6 +1,6 @@
 const pkg = require('../../package.json');
 
-module.exports = {
+module.exports = ctx => ({
   base:'/vue-i18next/',
   title: pkg.name,
   description: pkg.description,
@@ -8,7 +8,7 @@ module.exports = {
   head: [
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
   ],
-  serviceWorker: false,
+  theme: '@vuepress/vue',
   themeConfig: {
     repo: 'panter/vue-i18next',
     editLinks: true,
@@ -50,4 +50,4 @@ module.exports = {
       }
     }
   }
-}
+})
