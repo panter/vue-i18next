@@ -13,9 +13,10 @@
     "window": true,
     "__VERSION__": true
   },
-  "plugins": [],
-  "extends": ["airbnb"],
+  "plugins": ["prettier"],
+  "extends": ["airbnb", "prettier"],
   "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true }],
     "arrow-body-style": [1, "as-needed"],
     "no-underscore-dangle": 0,
     "react/prop-types": 0,

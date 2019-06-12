@@ -10,7 +10,8 @@ function equalLanguage(el, vnode) {
 function equalValue(value, oldValue) {
   if (value === oldValue) {
     return true;
-  } else if (value && oldValue) {
+  }
+  if (value && oldValue) {
     return (
       value.path === oldValue.path &&
       value.language === oldValue.language &&
@@ -38,16 +39,14 @@ function parseValue(value) {
   if (typeof value === 'string') {
     path = value;
   } else if (toString.call(value) === '[object Object]') {
-    path = value.path;
-    language = value.language;
-    args = value.args;
+    ({ path, language, args } = value);
   }
 
   return { path, language, args };
 }
 
 function t(el, binding, vnode) {
-  const value = binding.value;
+  const { value } = binding;
 
   const { path, language, args } = parseValue(value);
   if (!path && !language && !args) {
@@ -66,7 +65,10 @@ function t(el, binding, vnode) {
   }
 
   const vm = vnode.context;
-  el.textContent = vm.$i18n.i18next.t(path, { ...(language ? { lng: language } : {}), ...args });
+  el.textContent = vm.$i18n.i18next.t(path, {
+    ...(language ? { lng: language } : {}),
+    ...args
+  });
 
   el._i18nLanguage = vm.$i18n.i18next.language;
 }
@@ -89,5 +91,5 @@ export function update(el, binding, vnode, oldVNode) {
 
 export default {
   bind,
-  update,
+  update
 };

@@ -14,28 +14,28 @@ export function install(_Vue) {
 
   Vue = _Vue;
 
-  const getByKey = (i18nOptions, i18nextOptions) => (key) => {
+  const getByKey = (i18nOptions, i18nextOptions) => key => {
     if (
-        i18nOptions &&
-        i18nOptions.keyPrefix &&
-        !key.includes(i18nextOptions.nsSeparator)
-      ) {
+      i18nOptions &&
+      i18nOptions.keyPrefix &&
+      !key.includes(i18nextOptions.nsSeparator)
+    ) {
       return `${i18nOptions.keyPrefix}.${key}`;
     }
     return key;
   };
 
-  const getComponentNamespace = (vm) => {
+  const getComponentNamespace = vm => {
     const namespace = vm.$options.name || vm.$options._componentTag;
     if (namespace) {
       return {
         namespace,
-        loadNamespace: true,
+        loadNamespace: true
       };
     }
 
     return {
-      namespace: `${Math.random()}`,
+      namespace: `${Math.random()}`
     };
   };
 
@@ -55,10 +55,10 @@ export function install(_Vue) {
         const { namespace, loadNamespace } = getNamespace(this);
 
         if (options.__i18n) {
-          options.__i18n.forEach((resource) => {
+          options.__i18n.forEach(resource => {
             inlineTranslations = deepmerge(
               inlineTranslations,
-              JSON.parse(resource),
+              JSON.parse(resource)
             );
           });
         }
@@ -67,7 +67,7 @@ export function install(_Vue) {
           const {
             lng = null,
             keyPrefix = null,
-            messages,
+            messages
           } = this.$options.i18nOptions;
           let { namespaces } = this.$options.i18nOptions;
           namespaces = namespaces || this._i18n.i18next.options.defaultNS;
@@ -85,7 +85,7 @@ export function install(_Vue) {
           this._i18nOptions = { ...options.parent._i18nOptions };
           this._i18nOptions.namespaces = [
             namespace,
-            ...this._i18nOptions.namespaces,
+            ...this._i18nOptions.namespaces
           ];
         } else if (options.__i18n) {
           this._i18nOptions = { namespaces: [namespace] };
@@ -96,38 +96,40 @@ export function install(_Vue) {
         }
 
         const languages = Object.keys(inlineTranslations);
-        languages.forEach((lang) => {
+        languages.forEach(lang => {
           this._i18n.i18next.addResourceBundle(
             lang,
             namespace,
             { ...inlineTranslations[lang] },
             true,
-            false,
+            false
           );
         });
       }
 
       const getKey = getByKey(
-          this._i18nOptions,
-          this._i18n ? this._i18n.i18next.options : {},
-        );
+        this._i18nOptions,
+        this._i18n ? this._i18n.i18next.options : {}
+      );
 
       if (this._i18nOptions && this._i18nOptions.namespaces) {
         const { lng, namespaces } = this._i18nOptions;
 
         const fixedT = this._i18n.i18next.getFixedT(lng, namespaces);
         this._getI18nKey = (key, i18nextOptions) =>
-            fixedT(getKey(key), i18nextOptions, this._i18n.i18nLoadedAt);
+          fixedT(getKey(key), i18nextOptions, this._i18n.i18nLoadedAt);
       } else {
         this._getI18nKey = (key, i18nextOptions) =>
           this._i18n.t(getKey(key), i18nextOptions, this._i18n.i18nLoadedAt);
       }
-    },
+    }
   });
 
   // extend Vue.js
   Object.defineProperty(Vue.prototype, '$i18n', {
-    get() { return this._i18n; },
+    get() {
+      return this._i18n;
+    }
   });
 
   Vue.prototype.$t = function t(key, options) {
