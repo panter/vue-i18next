@@ -19,11 +19,13 @@ export function install(_Vue) {
   Vue.mixin(mixins);
 
   // define $i18n getter
-  Object.defineProperty(Vue.prototype, '$i18n', {
-    get() {
-      return this._i18n;
-    }
-  });
+  if (!Object.prototype.hasOwnProperty.call(Vue.prototype, '$i18n')) {
+    Object.defineProperty(Vue.prototype, '$i18n', {
+      get() {
+        return this._i18n;
+      }
+    });
+  }
 
   // define $t
   Vue.prototype.$t = function t(key, options) {
