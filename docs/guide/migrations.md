@@ -4,7 +4,7 @@
 
 ### v-t
 
-Removed the options language, we use the i18next implemantation to controll the language.
+Removed the options language, we use the i18next implementation to controll the language.
 
 ```js
 

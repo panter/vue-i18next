@@ -29,9 +29,10 @@ export function range(count) {
 }
 
 export function generateId(count = 18) {
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const alphabet =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   return range(count).reduce(
     id => id + alphabet.charAt(Math.floor(Math.random() * alphabet.length)),
-    '',
+    ''
   );
 }
