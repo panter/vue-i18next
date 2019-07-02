@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign, no-unused-vars */
 
-import { warn, deprecate } from './utils';
+import { warn, deprecate } from '../utils';
 
 function equalLanguage(el, vnode) {
   const vm = vnode.context;
@@ -12,11 +12,7 @@ function equalValue(value, oldValue) {
     return true;
   }
   if (value && oldValue) {
-    return (
-      value.path === oldValue.path &&
-      value.language === oldValue.language &&
-      value.args === oldValue.args
-    );
+    return value.path === oldValue.path && value.args === oldValue.args;
   }
 }
 
@@ -33,23 +29,22 @@ function assert(vnode) {
 
 function parseValue(value) {
   let path;
-  let language;
   let args;
 
   if (typeof value === 'string') {
     path = value;
   } else if (toString.call(value) === '[object Object]') {
-    ({ path, language, args } = value);
+    ({ path, args } = value);
   }
 
-  return { path, language, args };
+  return { path, args };
 }
 
 function t(el, binding, vnode) {
   const { value } = binding;
 
-  const { path, language, args } = parseValue(value);
-  if (!path && !language && !args) {
+  const { path, args } = parseValue(value);
+  if (!path && !args) {
     warn('v-t: invalid value');
     return;
   }
@@ -59,16 +54,8 @@ function t(el, binding, vnode) {
     return;
   }
 
-  if (language) {
-    deprecate(`v-t: "language" is deprecated.Use the "lng" property in args.
-      https://www.i18next.com/overview/configuration-options#configuration-options`);
-  }
-
   const vm = vnode.context;
-  el.textContent = vm.$i18n.i18next.t(path, {
-    ...(language ? { lng: language } : {}),
-    ...args
-  });
+  el.textContent = vm.$i18n.i18next.t(path, { ...args });
 
   el._i18nLanguage = vm.$i18n.i18next.language;
 }

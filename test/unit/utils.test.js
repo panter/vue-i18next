@@ -1,12 +1,11 @@
-
-import { deprecate, log, warn } from '../../src/utils';
+import { deprecate, warn } from '../../src/utils';
 
 describe('utils', () => {
   describe('log', () => {
     it('call console.warn if console is present', () => {
       const spy = sinon.spy(console, 'warn');
 
-      log('test warning');
+      warn('test warning');
       expect(spy.notCalled).to.equal(false);
       expect(spy.callCount).to.equal(1);
       spy.restore();
@@ -17,7 +16,7 @@ describe('utils', () => {
       const _console = window.console;
 
       window.console = undefined;
-      log('test warning');
+      warn('test warning');
       window.console = _console;
 
       expect(spy.notCalled).to.equal(true);
@@ -42,7 +41,9 @@ describe('utils', () => {
 
       deprecate('use something other');
       expect(spy.notCalled).to.equal(false);
-      expect(spy.getCall(0).calledWith('[vue-i18next deprecated]: use something other')).to.equal(true);
+      expect(spy.getCall(0).calledWith('[vue-i18next deprecated]: use something other')).to.equal(
+        true,
+      );
       spy.restore();
     });
   });

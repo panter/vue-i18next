@@ -29,42 +29,14 @@ i18next.init({
 
 const i18n = new VueI18next(i18next);
 
-Vue.component('app', {
-  template: `
-  <div>
-    <div>
-        <h3>Translation</h3>
-        <language-changer></language-changer><load-bundle></load-bundle>
-        <p>$t: {{ $t("message.hello") }}</p>
-    </div>
-    <div>
-      <h3>Interpolation</h3>
-      <i18next path="term" tag="label" for="tos">
-        <a href="#" target="_blank">{{ $t("tos") }}</a>
-        <strong>a</strong>
-      </i18next>
-    </div>
-    <div>
-      <h3>Prefix</h3>
-      <key-prefix></key-prefix>
-    </div>
-    <div>
-      <h3>Inline translations</h3>
-      <inline-translations></inline-translations>
-    </div>
-    <div>
-      <h3>Directive</h3>
-      <with-directive></with-directive>
-    </div>
-  </div>`,
-});
+Vue.component('app');
 
 Vue.component('language-changer', {
   template: `
     <div>
-      <a v-on:click="changeLanguage('de')">DE</a>
+      <a v-on:click="() => {changeLanguage('de')}">DE</a>
       &nbsp;|&nbsp;
-      <a v-on:click="changeLanguage('en')">EN</a>
+      <a v-on:click="() => {changeLanguage('en')}">EN</a>
     </div>`,
   methods: {
     changeLanguage(lang) {
@@ -117,11 +89,8 @@ Vue.component('inline-translations', {
     </div>`,
 });
 
-Vue.component('with-directive', {
-  template: `
-    <div v-t="{path:'message.hello'}"></div>`,
-});
-
 new Vue({
   i18n,
 }).$mount('#app');
+
+window.i18nLocales = locales;

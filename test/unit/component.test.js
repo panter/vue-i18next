@@ -39,7 +39,7 @@ describe('Components namespaces', () => {
               },
             },
             'sub-child2': {
-              i18nOptions: { namespaces: 'common' },
+              i18nOptions: { ns: 'common' },
               render(h) {
                 return h('div', {}, [
                   h('p', { ref: 'key1' }, [this.$t('key1', { name: 'Waldo' })]),
@@ -55,7 +55,7 @@ describe('Components namespaces', () => {
           },
         },
         child2: {
-          i18nOptions: { namespaces: 'common' },
+          i18nOptions: { ns: 'common' },
           components: {
             'sub-child1': {
               i18nOptions: { lng: 'de' },
@@ -293,7 +293,7 @@ describe('Components with backend', () => {
       const el = document.createElement('div');
       vm = new Vue({
         i18n: vueI18Next,
-        i18nOptions: { namespaces: 'common' },
+        i18nOptions: { ns: 'common' },
 
         render(h) {
           return h('div', {}, [h('p', { ref: 'hello' }, [this.$t('key1')])]);
@@ -346,7 +346,7 @@ describe('Components with backend', () => {
                 },
               },
               'sub-child2': {
-                i18nOptions: { namespaces: 'common' },
+                i18nOptions: { ns: 'common' },
                 render(h) {
                   return h('div', {}, [h('p', { ref: 'key12' }, [this.$t('key1')])]);
                 },

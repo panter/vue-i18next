@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign, no-unused-vars */
 
-import { warn } from './utils';
+import { warn } from '../utils';
 
 function assert(vnode) {
   const vm = vnode.context;
