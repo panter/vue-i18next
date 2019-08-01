@@ -27,7 +27,7 @@ const i18n = new VueI18next(i18next);
 
 // simple usage
 Vue.component("app", {
-  template: `<p v-t="hello"></p>`
+  template: `<p v-t="'hello'"></p>`
 });
 
 // full featured
