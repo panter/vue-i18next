@@ -296,7 +296,10 @@ describe('Components with backend', () => {
         i18nOptions: { namespaces: 'common' },
 
         render(h) {
-          return h('div', {}, [h('p', { ref: 'hello' }, [this.$t('key1')])]);
+          return h('div', {}, [
+            h('p', { ref: 'hello' }, [this.$t('key1')]),
+            h('i18next', { ref: 'i18nextComponent', props: {path: 'key1'} }, []),
+          ]);
         },
       }).$mount(el);
 
@@ -305,11 +308,14 @@ describe('Components with backend', () => {
 
     it('should render sub components correctly', async () => {
       const root = vm.$refs.hello;
+      const i18nextComponent = vm.$refs.i18nextComponent;
       expect(root.textContent).to.equal('key1');
+      expect(i18nextComponent.textContent).to.equal('key1');
       backend.flush();
       await nextTick();
 
       expect(root.textContent).to.equal('dev__common__test');
+      expect(i18nextComponent.textContent).to.equal('dev__common__test');
     });
 
     it('should wait for translation to be ready', async () => {
@@ -378,6 +384,41 @@ describe('Components with backend', () => {
 
       expect(key11.textContent).to.equal('de__translation__test');
       expect(key12.textContent).to.equal('de__common__test');
+    });
+  });
+
+  describe('when using i18next component and not $t', () => {
+    const i18next1 = i18next.createInstance();
+    let vueI18Next;
+    let vm;
+    beforeEach((done) => {
+      i18next1.use(backend).init({
+        lng: 'en',
+      });
+      vueI18Next = new VueI18Next(i18next1);
+
+      const el = document.createElement('div');
+      vm = new Vue({
+        i18n: vueI18Next,
+        i18nOptions: { namespaces: 'common' },
+
+        render(h) {
+          return h('div', {}, [
+            h('i18next', { ref: 'i18nextComponent', props: { path: 'key1' } }, []),
+          ]);
+        },
+      }).$mount(el);
+
+      vm.$nextTick(done);
+    });
+
+    it('should render sub components correctly', async () => {
+      const root = vm.$refs.i18nextComponent;
+      expect(root.textContent).to.equal('key1');
+      backend.flush();
+      await nextTick();
+
+      expect(root.textContent).to.equal('dev__common__test');
     });
   });
 });
