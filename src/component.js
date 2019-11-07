@@ -16,7 +16,8 @@ export default {
   },
   render(h, { props, data, children, parent }) {
     const i18next = parent.$i18n;
-    if (!i18next) {
+    const $t = parent.$t.bind(parent);
+    if (!i18next || !$t) {
       return h(props.tag, data, children);
     }
 
@@ -24,10 +25,11 @@ export default {
     const options = props.options || {};
 
     const REGEXP = i18next.i18next.services.interpolator.regexp;
-    const format = i18next.t(path, {
+    const i18nextOptions = {
       ...options,
       interpolation: { prefix: '#$?', suffix: '?$#' }
-    });
+    };
+    const format = $t(path, i18nextOptions);
     const tchildren = [];
 
     format.split(REGEXP).reduce((memo, match, index) => {
