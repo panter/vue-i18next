@@ -43,4 +43,15 @@ describe('basic', () => {
       expect(duckMixin).to.be.false;
     });
   });
+  describe('if $i18n is already defined', () => {
+    it('should still install just fine', () => {
+      // If there are two instances of VueI18Next such as using a library that is using VueI18Next
+      // while the base project also uses VueI18Next then when the plugin tries to install VueI18Next
+      // it's VueI18Next.install.installed will be false as it should be and when it gets to
+      // where it should define $i18n on Vue's prototype can't because it's already defined and that is fine
+      VueI18Next.install.installed = false;
+      VueI18Next.install(Vue);
+      expect(VueI18Next.install.installed).to.be.true;
+    });
+  });
 });

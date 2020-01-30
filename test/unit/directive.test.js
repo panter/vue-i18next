@@ -88,7 +88,22 @@ describe('directive', () => {
       // const spy = sinon.spy(t);
       const vm = new Vue({
         i18n: vueI18Next,
-        data: { name: 'Hans' },
+        data: {
+          value: {
+            path: 'helloPerson',
+            language: 'de',
+            args: { name: 'Hans' },
+          },
+        },
+        // computed: {
+        //   value() {
+        //     return {
+        //       path: this.path,
+        //       language: this.language,
+        //       args: this.args,
+        //     };
+        //   },
+        // },
         render(h) {
           return h('p', {
             ref: 'text',
@@ -96,20 +111,23 @@ describe('directive', () => {
               {
                 name: 't',
                 rawName: 'v-t',
-                value: {
-                  path: 'helloPerson',
-                  language: 'de',
-                  args: { name: this.name },
-                },
+                value: this.value,
                 expression:
-                  "{ path: 'helloPerson', language: 'de', args: { name: this.name } }",
+                  "{ path: 'helloPerson', language: 'de', args: { name: this.value.args.name } }",
               },
             ],
           });
         },
       }).$mount(el);
 
-      vm.name = 'Peter';
+      vm.value = {
+        path: 'helloPerson',
+        language: 'de',
+        args: { name: 'Peter' },
+      };
+      await nextTick();
+      expect(vm.$el.outerHTML).to.equal('<p>Hallo Peter</p>');
+      vm.value = null;
       await nextTick();
       expect(vm.$el.outerHTML).to.equal('<p>Hallo Peter</p>');
     });
