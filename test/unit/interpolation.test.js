@@ -100,6 +100,23 @@ describe('interpolation', () => {
       expect(vm.$el.outerHTML).to.equal('<div>Hello <p place="first">First Hello</p> <span place="second">test</span>.</div>');
     });
 
+    it('should interpolate components supporting text nodes', async () => {
+      const el = document.createElement('div');
+      const vm = new Vue({
+        i18n: vueI18Next,
+        render(h) {
+          return h('i18next', { ref: 'text', props: { tag: 'div', path: 'hello3' } }, [
+            h('p', { domProps: { textContent: 'First Hello' }, attrs: { place: 'first' } }),
+            'hello',
+            h('span', { domProps: { textContent: 'test' }, attrs: { place: 'second' } }),
+          ]);
+        },
+      }).$mount(el);
+
+      await nextTick();
+      expect(vm.$el.outerHTML).to.equal('<div>Hello <p place="first">First Hello</p> <span place="second">test</span>.</div>');
+    });
+
     it('should just return the children if i18next is not installed', async () => {
       const el = document.createElement('div');
       const vm = new Vue({
