@@ -18,7 +18,7 @@ by [@kazupon](https://github.com/kazupon)
 
 ## i18n tag
 
-To be able to use the `<i18>` you need to use the vue-loader:
+To be able to use the `<i18n>` you need to use the vue-loader:
 
 ```
 npm install @kazupon/vue-i18n-loader --save-dev
