@@ -1,7 +1,6 @@
-import Vue, { ComponentOptions } from "vue";
-import * as i18next from "i18next";
+import Vue from "vue";
+import i18next from "i18next";
 import VueI18Next from "../index";
-import { TranslationFunction } from "i18next";
 import Component from "vue-class-component";
 
 /**
@@ -17,7 +16,6 @@ i18next.init({
   resources: {}
 });
 const i18n = new VueI18Next(i18next);
-const i18nWithOptions = new VueI18Next(i18next, {});
 
 const vm = new Vue({
   i18n

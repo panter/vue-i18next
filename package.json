@@ -39,7 +39,7 @@
   "unpkg": "./dist/vue-i18next.js",
   "types": "typings/index.d.ts",
   "peerDependencies": {
-    "i18next": ">= 6.0.1",
+    "i18next": "^19.8.3",
     "vue": ">=2.0.0"
   },
   "devDependencies": {
@@ -68,7 +68,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
     "gh-pages": "^1.0.0",
-    "i18next": "^6.0.1",
+    "i18next": "19.8.3",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "karma": "^4.1.0",
@@ -100,7 +100,7 @@
     "semantic-release": "^15.13.12",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0",
-    "typescript": "^2.8.3",
+    "typescript": "^4.0.5",
     "vue": "^2.5.16",
     "vue-class-component": "^7.1.0",
     "vue-template-compiler": "^2.5.16",
