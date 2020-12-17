@@ -1,8 +1,3 @@
-.DS_Store
-node_modules/
 dist/
-lib/
-gh-pages/
-npm-debug.log
-test/coverage
-.temp/
+node_modules/
+types/

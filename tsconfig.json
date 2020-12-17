@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "types",
+    "module": "commonjs",
+    "outDir": "dist",
+    "target": "ES2020",
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true
+  },
+  "include": [
+    "index.ts"
+  ]
+}
