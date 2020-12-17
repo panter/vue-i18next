@@ -1,7 +1,7 @@
 {
   "name": "@fatal-insomnia/vue-i18next",
   "description": "i18next integration for Vue",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": {
     "name": "David Luis Wiegandt",
     "email": "david-luis.wiegandt@charite.de",
