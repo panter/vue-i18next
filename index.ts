@@ -21,12 +21,15 @@ export default function install(Vue: typeof _Vue): void {
             const name = this.$options.name;
             const rand = ((Math.random() * 10 ** 8) | 0).toString(); // each component gets its own 8-digit random namespace...
             const localNs = [name, rand].filter(x => !!x).join("-"); // ...prefixed with its name if available (for debugging purposes)
+
+            // iterate all <i18n> blocks' contents as provided by @intlify/vue-i18n-loader and make them available to i18next
             this.$options.__i18n.forEach(bundle => {
-                // iterate all <i18n> blocks' contents as provided by @intlify/vue-i18n-loader
                 Object.entries(JSON.parse(bundle)).forEach(([lng, resources]) => {
                     i18next.addResourceBundle(lng, localNs, resources, true, false);
                 });
             });
+
+            // transforms a non-namespaced key into a component-scoped key
             this.__key = (key: string) => {
                 const nsSeparator = i18next.options.nsSeparator;
                 const includesNs = typeof nsSeparator === "string" && key.includes(nsSeparator);
