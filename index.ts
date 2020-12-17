@@ -17,10 +17,11 @@ declare module "vue/types/options" {
 export default function install(Vue: typeof _Vue): void {
     Vue.mixin({
         beforeCreate() {
+            if (!this.$options.__i18n) return;
             const name = this.$options.name;
             const rand = ((Math.random() * 10 ** 8) | 0).toString(); // each component gets its own 8-digit random namespace...
             const localNs = [name, rand].filter(x => !!x).join("-"); // ...prefixed with its name if available (for debugging purposes)
-            this.$options.__i18n?.forEach(bundle => {
+            this.$options.__i18n.forEach(bundle => {
                 // iterate all <i18n> blocks' contents as provided by @intlify/vue-i18n-loader
                 Object.entries(JSON.parse(bundle)).forEach(([lng, resources]) => {
                     i18next.addResourceBundle(lng, localNs, resources, true, false);
