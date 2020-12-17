@@ -18,9 +18,11 @@ export default function install(Vue: typeof _Vue): void {
     Vue.mixin({
         beforeCreate() {
             if (!this.$options.__i18n) return;
+
+            // each component gets its own 8-digit random namespace prefixed with its name if available
             const name = this.$options.name;
-            const rand = ((Math.random() * 10 ** 8) | 0).toString(); // each component gets its own 8-digit random namespace...
-            const localNs = [name, rand].filter(x => !!x).join("-"); // ...prefixed with its name if available (for debugging purposes)
+            const rand = ((Math.random() * 10 ** 8) | 0).toString();
+            const localNs = [name, rand].filter(x => !!x).join("-");
 
             // iterate all <i18n> blocks' contents as provided by @intlify/vue-i18n-loader and make them available to i18next
             this.$options.__i18n.forEach(bundle => {
