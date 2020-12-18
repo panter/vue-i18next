@@ -4,6 +4,7 @@ import i18next, { TFunction } from "i18next";
 declare module "vue/types/vue" {
     interface Vue {
         $t: TFunction;
+        __bundles?: Array<[lng: string, ns: string]>;  // the bundles loaded by the component
         __key?: (key: string) => string; // local to each component with an <i18n> block
     }
 }
@@ -24,10 +25,14 @@ export default function install(Vue: typeof _Vue): void {
             const rand = ((Math.random() * 10 ** 8) | 0).toString();
             const localNs = [name, rand].filter(x => !!x).join("-");
 
+            // used to store added resource bundle identifiers for later removal upen component destruction
+            this.__bundles = new Array(i18next.languages.length);
+
             // iterate all <i18n> blocks' contents as provided by @intlify/vue-i18n-loader and make them available to i18next
             this.$options.__i18n.forEach(bundle => {
                 Object.entries(JSON.parse(bundle)).forEach(([lng, resources]) => {
                     i18next.addResourceBundle(lng, localNs, resources, true, false);
+                    this.__bundles.push([lng, localNs]);
                 });
             });
 
@@ -37,6 +42,9 @@ export default function install(Vue: typeof _Vue): void {
                 const includesNs = typeof nsSeparator === "string" && key.includes(nsSeparator);
                 return includesNs ? key : `${localNs}:${key}`; // prefix the key with its component's local namespace if no namespace is specified
             };
+        },
+        destroyed(this: _Vue) {
+            this.__bundles?.forEach(([lng, ns]) => i18next.removeResourceBundle(lng, ns)); // avoid memory leaks
         }
     });
 
