@@ -1,5 +1,5 @@
 import _Vue from "vue";
-import i18next, { TFunction } from "i18next";
+import { i18n, TFunction } from "i18next";
 
 declare module "vue/types/vue" {
     interface Vue {
@@ -15,7 +15,11 @@ declare module "vue/types/options" {
     }
 }
 
-export default function install(Vue: typeof _Vue): void {
+interface VueI18NextOptions {
+    i18next: i18n;
+}
+
+export default function install(Vue: typeof _Vue, { i18next }: VueI18NextOptions): void {
     Vue.mixin({
         beforeCreate() {
             if (!this.$options.__i18n) return;
@@ -26,13 +30,13 @@ export default function install(Vue: typeof _Vue): void {
             const localNs = [name, rand].filter(x => !!x).join("-");
 
             // used to store added resource bundle identifiers for later removal upen component destruction
-            this.__bundles = new Array(i18next.languages.length);
+            this.__bundles = [];
 
             // iterate all <i18n> blocks' contents as provided by @intlify/vue-i18n-loader and make them available to i18next
             this.$options.__i18n.forEach(bundle => {
                 Object.entries(JSON.parse(bundle)).forEach(([lng, resources]) => {
                     i18next.addResourceBundle(lng, localNs, resources, true, false);
-                    this.__bundles.push([lng, localNs]);
+                    this.__bundles!.push([lng, localNs]);
                 });
             });
 

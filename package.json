@@ -19,6 +19,7 @@
     "vue"
   ],
   "scripts": {
+    "dev": "tsc --watch",
     "build": "tsc",
     "prepare": "npm run build"
   },

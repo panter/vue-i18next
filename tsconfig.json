@@ -2,13 +2,17 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "types",
-    "module": "commonjs",
+    "module": "CommonJS",
     "outDir": "dist",
     "target": "ES2020",
     "removeComments": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node"
   },
   "include": [
     "index.ts"
