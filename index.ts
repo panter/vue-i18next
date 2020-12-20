@@ -4,7 +4,9 @@ import { i18n, TFunction } from "i18next";
 declare module "vue/types/vue" {
     interface Vue {
         $t: TFunction;
-        __bundles?: Array<[lng: string, ns: string]>;  // the bundles loaded by the component
+        $i18next: i18n;
+
+        __bundles?: Array<[string, string]>;  // the bundles loaded by the component
         __key?: (key: string) => string; // local to each component with an <i18n> block
     }
 }
@@ -55,4 +57,10 @@ export default function install(Vue: typeof _Vue, { i18next }: VueI18NextOptions
     Vue.prototype.$t = function (this: _Vue, key: string, options?: string | Record<string, any>): string {
         return i18next.t(this.__key?.(key) ?? key, options);
     };
+
+    Object.defineProperty(Vue.prototype, "$i18next", {
+        get() {
+            return i18next;
+        }
+    });
 }

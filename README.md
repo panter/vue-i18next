@@ -12,15 +12,17 @@ This library is a simple wrapper for [i18next](https://www.i18next.com), simplif
 import Vue from "vue";
 import i18next from "i18next";
 import VueI18Next from "@fatal-insomnia/vue-i18next";
+import App from "./App.vue";
 
-Vue.use(VueI18Next);
+Vue.use(VueI18Next, { i18next });
 
-i18next.init({
-    lng: "de",
-    resources: { ... }
+i18next.on("initialized", () => {
+    new Vue({
+        render: h => h(App),
+    }).$mount("#app");
 });
 
-new Vue({ ... });
+i18next.init({ ... });
 ```
 
 ## Usage
