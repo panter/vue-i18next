@@ -11,7 +11,7 @@ This library is a simple wrapper for [i18next](https://www.i18next.com), simplif
 ```typescript
 import Vue from "vue";
 import i18next from "i18next";
-import VueI18Next from "@fatal-insomnia/vue-i18next";
+import VueI18Next from "@dotbase/vue-i18next";
 import App from "./App.vue";
 
 Vue.use(VueI18Next, { i18next });
@@ -45,3 +45,8 @@ Using the `$t` function, which works analogously to the `t` function found in [i
     <span>{{ $t('insurance') }}</span>
 </template>
 ```
+
+## Contributing
+
+### Requirements
+- node.js >= v15
