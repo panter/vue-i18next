@@ -1,5 +1,4 @@
 # vue-i18next
-
 > Stripped-down version of the package described in <https://panter.github.io/vue-i18next/>
 
 ## Introduction
