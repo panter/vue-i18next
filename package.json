@@ -1,22 +1,22 @@
 {
-  "name": "@fatal-insomnia/vue-i18next",
+  "name": "@dotbase/vue-i18next",
   "description": "i18next integration for Vue",
-  "version": "0.6.3",
-  "author": {
-    "name": "David Luis Wiegandt",
-    "email": "david-luis.wiegandt@charite.de",
-    "url": "https://dlw93.github.io"
-  },
+  "version": "1.0.1",
+  "author": "dot.base <movebase@charite.de> (https://movebase.de)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dlw93/vue-i18next.git"
+    "url": "https://github.com/dot-base/vue-i18next"
   },
-  "homepage": "https://github.com/dlw93/vue-i18next#readme",
+  "homepage": "https://github.com/dot-base/vue-i18next",
+  "bugs": {
+    "url": "https://github.com/dot-base/vue-i18next/issues"
+  },
   "keywords": [
     "i18n",
     "i18next",
-    "vue"
+    "vue",
+    "typescript"
   ],
   "scripts": {
     "dev": "tsc --watch",
