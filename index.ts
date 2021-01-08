@@ -57,10 +57,4 @@ export default function install(Vue: typeof _Vue, { i18next }: VueI18NextOptions
     Vue.prototype.$t = function (this: _Vue, key: string, options?: string | Record<string, any>): string {
         return i18next.t(this.__key?.(key) ?? key, options);
     };
-
-    Object.defineProperty(Vue.prototype, "$i18next", {
-        get() {
-            return i18next;
-        }
-    });
 }
