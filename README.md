@@ -1,3 +1,6 @@
+DEPRECATED, please use https://github.com/i18next/i18next-vue ! Thanks for your support!
+
+
 # vue-i18next
 
 [![Build Status](https://travis-ci.org/panter/vue-i18next.svg?branch=master)](https://travis-ci.org/panter/vue-i18next)
