@@ -45,6 +45,7 @@ export default {
           children.forEach(e => {
             if (
               !child &&
+              e.data && // Skip text nodes
               e.data.attrs &&
               e.data.attrs.place &&
               e.data.attrs.place === place
