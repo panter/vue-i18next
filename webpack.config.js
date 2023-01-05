@@ -31,8 +31,8 @@ module.exports = {
   devServer: {
     historyApiFallback: {
       rewrites: [
-        { from: /^\/$/, to: '/examples/index.html' },
-        { from: 'app.js', to: '/examples/app.js' },
+        { from: /^\/$/, to: '/examples/basic/index.html' },
+        { from: 'app.js', to: '/examples/basic/app.js' },
       ],
     },
     noInfo: true,
