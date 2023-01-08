@@ -27,16 +27,6 @@ Vue.component("app", {
       </i18next>
     </div>`
 });
-
-Vue.component("app", {
-  template: `
-    <div>
-      <i18next path="term" tag="label">
-        <a href="#" target="_blank">{{ $t("tos") }}</a>
-        <strong>{{ $t("promise") }}</strong>
-      </i18next>
-    </div>`
-});
 ```
 
 ```javascript
