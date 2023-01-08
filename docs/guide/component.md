@@ -26,7 +26,7 @@ const i18n = new VueI18next(i18next);
 const Component1 = {
   template: `
     <div class="container">
-      <strong>{{$t("loadbundle", {lang: this.lang}) }}</strong>
+      <strong>{{$t("loadbundle", {lng: this.lang}) }}</strong>
     </div>`,
   data() {
     return {
